@@ -12,6 +12,9 @@
 .file-upload-container button:hover {
   background-color: rgba(255, 255, 255, 0.723);
 }
+.file-upload-container button:active {
+  transform: scale(1.1);
+}
 .file-upload-container input {
   color: white;
   font-size: 1rem;
