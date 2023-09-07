@@ -10,7 +10,7 @@ export default function Home() {
       <Navbar />
       <div className="body">
         <div className="body-header">
-          <h5>Please upload a file to get started</h5>
+          <h5 className="header">Please upload a file to get started</h5>
         </div>
         <div className="file-uploader">
           <FileUpload />

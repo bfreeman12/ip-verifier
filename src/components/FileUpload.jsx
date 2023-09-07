@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { postIpAddresses } from "../functions/apifetch";
 import Papa from "papaparse";
+import "../styles/upload.css";
 
 const allowedExtensions = ["csv"];
 
@@ -9,12 +10,10 @@ const FileUpload = () => {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
-
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
       const fileExtension = inputFile?.type.split("/")[1];
       if (!allowedExtensions.includes(fileExtension)) {
-        setError("Please input a csv file");
         return;
       }
       setFile(inputFile);
@@ -54,21 +53,9 @@ const FileUpload = () => {
   }, [data]);
 
   return (
-    <div>
-      <label>
-        Enter CSV File
-      </label>
-      <input
-        onChange={handleFileChange}
-        id="csvInput"
-        name="file"
-        type="File"
-        accept=".csv"
-      />
-      <div>
-        <button onClick={handleParse}>Parse</button>
-      </div>
-      <textarea value={data}></textarea>
+    <div className="file-upload-container">
+      <input type="file" name="file" id="file" accept=".csv" />
+      <button onClick={handleParse}>Parse</button>
     </div>
   );
 };
