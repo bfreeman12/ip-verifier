@@ -6,11 +6,9 @@ const allowedExtensions = ["csv"];
 
 const FileUpload = () => {
   const [data, setData] = useState([]);
-  const [error, setError] = useState("");
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
-    setError("");
 
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
@@ -57,7 +55,7 @@ const FileUpload = () => {
 
   return (
     <div>
-      <label htmlFor="csvInput" style={{ display: "block" }}>
+      <label>
         Enter CSV File
       </label>
       <input
