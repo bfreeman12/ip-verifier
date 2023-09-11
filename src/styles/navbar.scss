@@ -26,7 +26,7 @@
   }
 
   .links {
-    width: 50%;
+    width: 25%;
     height: 50%;
     display: flex;
     justify-content: space-evenly;
@@ -39,7 +39,6 @@
       text-decoration: none;
     }
     .link:hover {
-
       cursor: pointer;
       border-bottom: 1px solid #ff6600;
       margin-bottom: -1px;

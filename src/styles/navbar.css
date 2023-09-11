@@ -27,7 +27,7 @@
   min-width: 70px;
 }
 .navbar .links {
-  width: 50%;
+  width: 25%;
   height: 50%;
   display: flex;
   justify-content: space-evenly;
