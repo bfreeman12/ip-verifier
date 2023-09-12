@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { postIpAddresses } from "../functions/apifetch";
-import Papa from "papaparse";
 import "../styles/upload.css";
-
-const allowedExtensions = ["csv"];
 
 const FileUpload = () => {
   const [data, setData] = useState([]);
@@ -12,40 +9,30 @@ const FileUpload = () => {
   const handleFileChange = (e) => {
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
-      const fileExtension = inputFile?.type.split("/")[1];
-      if (!allowedExtensions.includes(fileExtension)) {
-        return;
-      }
       setFile(inputFile);
     }
   };
 
-  const handleParse = (e) => {
-    e.preventDefault();
-
-    if (file) {
-      Papa.parse(file, {
-        header: true,
-        skipEmptyLines: true,
-        complete: function (results) {
-          const dataArray = [];
-          const valuesArray = [];
-
-          results.data.map((rows) => {
-            valuesArray.push(Object.values(rows));
-          });
-
-          valuesArray.map((value) => {
-            value.map((val) => {
-              dataArray.push(val);
-            });
-          });
-          let uniqueData = [...new Set(dataArray)];
-
-          setData(uniqueData);
-        },
-      });
+  const handleParse = async () => {
+    if (!file) {
+      alert("Please select a file to parse.");
+      return;
     }
+
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const text = e.target.result;
+      const lines = text.split("\n");
+
+      const parsedData = lines.map((line) => {
+        return line.trim();
+      });
+
+      setData(parsedData);
+    };
+
+    reader.readAsText(file);
   };
 
   useEffect(() => {
@@ -54,7 +41,13 @@ const FileUpload = () => {
 
   return (
     <div className="file-upload-container">
-      <input type="file" name="file" id="file" accept=".csv" />
+      <input
+        type="file"
+        name="file"
+        id="file"
+        accept=".txt"
+        onChange={handleFileChange}
+      />
       <button onClick={handleParse}>Parse</button>
     </div>
   );
