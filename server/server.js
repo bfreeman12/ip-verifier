@@ -36,6 +36,9 @@ app.post("/api/post-ip", limiter, function (req, res, next) {
   req.body.forEach((address) => {
     console.log(address);
     axios.get(api_url + address).then((response) => {
+      //response has objects inside of it. need to parse the objects for the real data
+      // also will need to hook this into saving into a database when finished
+      // db format would possibly go reports - (date of report) - ip,score,blacklist
       const data = response.data;
       console.log(data);
     });
