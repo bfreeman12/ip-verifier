@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { postIpAddresses } from "../functions/apifetch";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import "../styles/upload.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const FileUpload = () => {
   const [data, setData] = useState([]);
@@ -28,26 +30,32 @@ const FileUpload = () => {
       const parsedData = lines.map((line) => {
         return line.trim();
       });
-
       setData(parsedData);
     };
-
     reader.readAsText(file);
   };
 
   useEffect(() => {
-    postIpAddresses(data);
+    if (data.length != 0) {
+      postIpAddresses(data);
+    } else {
+      console.error("no data");
+    }
   }, [data]);
 
   return (
     <div className="file-upload-container">
-      <input
-        type="file"
-        name="file"
-        id="file"
-        accept=".txt"
-        onChange={handleFileChange}
-      />
+      <label>
+        <FontAwesomeIcon icon={faUpload} />
+        Please upload a file
+        <input
+          type="file"
+          name="file"
+          id="file"
+          accept=".txt"
+          onChange={handleFileChange}
+        />
+      </label>
       <button onClick={handleParse}>Parse</button>
     </div>
   );

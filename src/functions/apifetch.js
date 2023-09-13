@@ -6,7 +6,7 @@ const endpoint = ["post-ip"];
 async function postIpAddresses(e) {
   const file = e;
   const response = await axios
-    .post(postUrl + endpoint[0], e)
+    .post(postUrl + endpoint[0], file)
     .then((response) => {
       console.log(response);
     })
