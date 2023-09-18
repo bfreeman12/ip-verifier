@@ -2,18 +2,23 @@
   height: 70%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   overflow-y: auto;
+  width: 100vw;
+  align-items: center;
 }
 .entries .entry {
-  width: 50vw;
-  background-color: rgba(255, 255, 255, 0.123);
-  border: 1px solid black;
-  border-radius: 5px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
+  padding-inline: 4rem;
+  box-sizing: border-box;
+  transition-duration: 0.2s;
+  width: 100%;
+}
+.entries .entry p {
+  display: flex;
+  flex: 1;
 }
 .entries .entry button {
   all: unset;
@@ -23,4 +28,13 @@
 }
 .entries .entry button:active {
   color: rgba(255, 255, 255, 0.63);
+}
+.entries .entry:nth-of-type(odd) {
+  background: rgba(255, 255, 255, 0.062);
+}
+.entries .entry:hover {
+  background-color: gray;
+  width: 90vw;
+  transition-duration: 0.2s;
+  cursor: pointer;
 }/*# sourceMappingURL=reports.css.map */

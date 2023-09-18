@@ -4,5 +4,6 @@ body {
   margin: 0px;
   overflow: hidden;
   font-weight: 400;
-  background: linear-gradient(0deg, #333333, rgba(0, 0, 0, 0.6509803922));
+  background: linear-gradient(0deg, #000000, #131313);
+  text-transform: capitalize;
 }/*# sourceMappingURL=app.css.map */
