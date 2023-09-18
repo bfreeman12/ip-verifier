@@ -34,7 +34,7 @@
   background: rgba(255, 255, 255, 0.062);
 }
 .entries .entry:hover {
-  background-color: rgba(128, 128, 128, 0.459);
+  background-color: gray;
   transition-duration: 0.2s;
   cursor: pointer;
-}/*# sourceMappingURL=reports.css.map */
+} /*# sourceMappingURL=reports.css.map */
