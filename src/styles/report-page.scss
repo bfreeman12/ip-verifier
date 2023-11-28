@@ -39,6 +39,10 @@ $highlight: #ee6c4d;
       display: flex;
       flex: 1;
       padding-inline: 1rem;
+      border-right: 1px solid $dark;
+    }
+    p:last-of-type {
+      border-right: none;
     }
     a {
       color: rgba(255, 255, 255, 0.8);

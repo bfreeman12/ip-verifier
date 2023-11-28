@@ -6,6 +6,7 @@ async function getReports(req, res) {
     const query = `
     SELECT *
     FROM reports
+    ORDER BY dateofreport DESC
   `;
 
     const { rows } = await client.query(query);

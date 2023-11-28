@@ -20,6 +20,8 @@ export default function saveReport(scannedIpList) {
   for (const scannedIp of scannedIpList) {
     let currentScannedIp = {
       reportuid: reportUID,
+      dateofscan: new Date(),
+      expirationdate: expirationDate,
       ip: scannedIp.data.report.ip,
       blacklists: scannedIp.data.report.blacklists,
       information: scannedIp.data.report.information,
@@ -34,6 +36,4 @@ export default function saveReport(scannedIpList) {
   saveReportToDatabase(currentReport);
 }
 
-saveReport(await scanIpList(["91.109.184.3"]));
-
-// console.log(new Date(new Date().setMonth(new Date().getMonth() + 3)));
+// saveReport(await scanIpList(["12.12.12.14", "13.13.13.15"]));

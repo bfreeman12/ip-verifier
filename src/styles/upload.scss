@@ -1,3 +1,10 @@
+$darkest: #181d25;
+$darker: #293241;
+$dark: #3d5a80;
+$light: #98c1d9;
+$lighter: #e0fbfc;
+$highlight: #ee6c4d;
+
 .file-upload-container {
   background-color: rgba(255, 255, 255, 0.192);
   // border: 1px dashed black;
@@ -23,8 +30,8 @@
   }
 
   label:hover {
-    color: black;
-    background-color: rgba(255, 255, 255, 0.723);
+    color: $darkest;
+    background-color: $light;
   }
   label:active {
     background-color: rgba(161, 161, 161, 0.723);
@@ -37,7 +44,7 @@
   }
 }
 button:hover {
-  background-color: rgba(255, 255, 255, 0.723);
+  background-color: $highlight;
 }
 button:active {
   background-color: rgba(112, 112, 112, 0.767);

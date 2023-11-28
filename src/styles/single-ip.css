@@ -1,0 +1,11 @@
+.page-container {
+  position: relative;
+  margin-top: 9vh;
+  padding-inline: 20vh;
+  padding-block: 1rem;
+}
+
+.content-container {
+  width: 100%;
+  height: 100%;
+}/*# sourceMappingURL=single-ip.css.map */

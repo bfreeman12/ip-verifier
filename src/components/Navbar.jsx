@@ -17,6 +17,9 @@ export default function Navbar() {
           <Link className="link" to="/reports">
             Reports
           </Link>
+          <Link className="link" to="/all-ips">
+            IPs
+          </Link>
         </div>
       </nav>
       <Outlet />

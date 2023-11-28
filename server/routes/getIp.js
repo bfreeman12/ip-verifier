@@ -24,5 +24,3 @@ const getIp = async (req, res) => {
 };
 
 export default getIp;
-
-console.log(await getIp("8.8.8.8"));

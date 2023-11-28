@@ -8,19 +8,23 @@ const saveIpToDatabase = async (scannedIp, reportUID) => {
     INSERT INTO ips
        (uid,
         reportUID,
+        dateofscan,
+        expirationdate,
         ip,
         blacklists,
         information,
         anonymity,
         risk_score
         ) 
-      values($1,$2,$3,$4,$5,$6,$7)
+      values($1,$2,$3,$4,$5,$6,$7,$8,$9)
     RETURNING uid;
     `;
 
     const { rows } = await client.query(query, [
       uuidv4(),
       reportUID,
+      scannedIp.dateofscan,
+      scannedIp.expirationdate,
       scannedIp.ip,
       scannedIp.blacklists,
       scannedIp.information,

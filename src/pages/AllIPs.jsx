@@ -8,23 +8,19 @@ import axios from "axios";
 import "../styles/report-page.css";
 import Footer from "../components/Footer";
 
-function fetchIps(reportuid) {
+function fetchIps() {
   return axios
-    .get("http://localhost:3200/getIpsByReport", {
-      params: {
-        reportuid: reportuid,
-      },
-    })
+    .get("http://localhost:3200/getIps")
     .then((response) => response.data)
     .catch((error) => console.error(error));
 }
 
-export default function ReportPage() {
+export default function AllIps() {
   let { uid } = useParams();
   const [ips, setIps] = useState([]);
 
   useEffect(() => {
-    fetchIps(uid).then((data) => {
+    fetchIps().then((data) => {
       setIps(data);
       console.log(data);
     });
@@ -34,7 +30,7 @@ export default function ReportPage() {
     <>
       <Navbar />
       <div className="report-body">
-        <h1>Report {uid}</h1>
+        <h1>All Scanned IPs</h1>
         <div className="ip-report">
           <ReportData ips={ips} />
         </div>

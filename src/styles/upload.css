@@ -23,8 +23,8 @@
   display: none;
 }
 .file-upload-container label:hover {
-  color: black;
-  background-color: rgba(255, 255, 255, 0.723);
+  color: #181d25;
+  background-color: #98c1d9;
 }
 .file-upload-container label:active {
   background-color: rgba(161, 161, 161, 0.723);
@@ -37,7 +37,7 @@
 }
 
 button:hover {
-  background-color: rgba(255, 255, 255, 0.723);
+  background-color: #ee6c4d;
 }
 
 button:active {

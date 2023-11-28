@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Reports from "../components/Reports";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -31,6 +32,7 @@ export default function ReportPage() {
           <Reports data={reports} />
         </div>
       </div>
+      <Footer />
     </>
   );
 }

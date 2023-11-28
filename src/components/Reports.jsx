@@ -2,30 +2,7 @@ import React from "react";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-
-function formatDate(dateString) {
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const date = new Date(dateString);
-
-  const year = date.getFullYear();
-  const month = months[date.getMonth()];
-  const day = date.getDate();
-
-  return `${month} ${day} ${year}`;
-}
+import formatDate from "../functions/formatDate";
 
 function Reports(data) {
   let formattedContent;

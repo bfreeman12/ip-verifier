@@ -1,4 +1,5 @@
 import React from "react";
+import formatDate from "../functions/formatDate";
 
 function ReportData(ips) {
   let formattedContent = [];
@@ -24,11 +25,11 @@ function ReportData(ips) {
 
       return (
         <div className="report" key={index}>
-          <p></p>
+          <p>{formatDate(scan.dateofscan)}</p>
           <p>{scan.ip}</p>
           <p>{scan.blacklists.detections}</p>
           <p>{scan.risk_score}</p>
-          <p></p>{" "}
+          <p>{formatDate(scan.expirationdate)}</p>
         </div>
       );
     });

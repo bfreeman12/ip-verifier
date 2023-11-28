@@ -6,6 +6,7 @@ async function getIps(req, res) {
     const query = `
     SELECT *
     FROM ips
+    ORDER BY dateofscan ASC
   `;
 
     const { rows } = await client.query(query);

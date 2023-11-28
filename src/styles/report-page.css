@@ -32,6 +32,10 @@
   display: flex;
   flex: 1;
   padding-inline: 1rem;
+  border-right: 1px solid #3d5a80;
+}
+.ip-report .report p:last-of-type {
+  border-right: none;
 }
 .ip-report .report a {
   color: rgba(255, 255, 255, 0.8);

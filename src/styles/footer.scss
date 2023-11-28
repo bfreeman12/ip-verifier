@@ -1,0 +1,19 @@
+$darkest: #181d25;
+$darker: #293241;
+$dark: #3d5a80;
+$light: #98c1d9;
+$lighter: #e0fbfc;
+$highlight: #ee6c4d;
+
+.footer {
+  height: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $darkest;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  margin: 0px;
+}
