@@ -1,0 +1,78 @@
+$darkest: #181d25;
+$darker: #293241;
+$dark: #3d5a80;
+$light: #98c1d9;
+$lighter: #e0fbfc;
+$highlight: #ee6c4d;
+
+.report-body {
+  display: flex;
+  margin-top: 9vh;
+  flex-direction: column;
+  padding-inline: 20vh;
+}
+
+.ip-report {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: $darkest;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid $darkest;
+  max-height: 70vh;
+  width: 100%;
+  position: relative;
+
+  .header {
+    background: $darkest !important;
+    position: sticky;
+  }
+
+  .report {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-inline: 4rem;
+    box-sizing: border-box;
+    transition-duration: 0.2s;
+    p {
+      display: flex;
+      flex: 1;
+      padding-inline: 1rem;
+    }
+    a {
+      color: rgba(255, 255, 255, 0.8);
+      width: 8rem;
+      text-decoration: none;
+      :active {
+        color: $highlight;
+      }
+    }
+
+    button {
+      all: unset;
+      width: 1rem;
+      padding-right: 2rem;
+      svg {
+        pointer-events: none;
+      }
+    }
+    button:active {
+      color: $highlight;
+    }
+  }
+  .report:nth-of-type(even) {
+    background: $darker;
+  }
+  .report:hover {
+    background-color: $dark;
+    transition-duration: 0.2s;
+    cursor: pointer;
+  }
+}
+
+// 22223b
+// 4a4e69
+// 9a8c98
+// c9ada7
+// f2e9e4

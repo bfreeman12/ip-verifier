@@ -34,6 +34,6 @@ export default function saveReport(scannedIpList) {
   saveReportToDatabase(currentReport);
 }
 
-saveReport(await scanIpList(["8.8.8.8", "8.8.4.4", "9.9.9.9"]));
+saveReport(await scanIpList(["91.109.184.3"]));
 
 // console.log(new Date(new Date().setMonth(new Date().getMonth() + 3)));

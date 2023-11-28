@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { postIpAddresses } from "../functions/apifetch";
+// import { postIpAddresses } from "../functions/apifetch";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import "../styles/upload.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

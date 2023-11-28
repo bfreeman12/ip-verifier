@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="body">
+      <div className="home-body">
         <div className="body-header">
           <h5 className="header">Please upload a file to get started</h5>
         </div>

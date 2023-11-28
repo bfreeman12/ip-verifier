@@ -1,85 +1,93 @@
-import React, { useState } from "react";
+import React from "react";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../styles/reports.css";
+import { Link } from "react-router-dom";
 
-const Reports = () => {
-  const [data, setData] = useState({
-    0: {
-      date: "12/12/1212",
-      label: "this is a label",
-      link: "this is a link",
-      banana: "banana",
-      threat: "low",
-    },
-    1: {
-      date: "12/12/1212",
-      label: "this is a label",
-      link: "this is a link",
-      banana: "banana",
-      threat: "low",
-    },
-    2: {
-      date: "12/12/1212",
-      label: "this is a label",
-      link: "this is a link",
-      banana: "banana",
-      threat: "low",
-    },
-    3: {
-      date: "12/12/1212",
-      label: "this is a label",
-      link: "this is a link",
-      banana: "banana",
-      threat: "low",
-    },
-    4: {
-      date: "12/12/1212",
-      label: "this is a label",
-      link: "this is a link",
-      banana: "banasdadana",
-      threat: "high",
-    },
-    5: {
-      date: "12/12/1212",
-      label: "this is a label",
-      link: "this is a link",
-      banana: "banana",
-      threat: "low",
-    },
-  });
-  let content;
+function formatDate(dateString) {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const date = new Date(dateString);
 
-  const removeElement = (e) => {
+  const year = date.getFullYear();
+  const month = months[date.getMonth()];
+  const day = date.getDate();
+
+  return `${month} ${day} ${year}`;
+}
+
+function Reports(data) {
+  let formattedContent;
+
+  function removeElement(e) {
     e.preventDefault();
     const targetIndex = e.target.id;
-
     const newData = { ...data };
     delete newData[targetIndex];
-
     setData(newData);
-  };
+  }
 
-  if (Object.keys(data).length > 0) {
-    content = Object.keys(data).map((key, index) => {
-      const entry = data[key];
+  function TableHeader() {
+    return (
+      <div className="report header">
+        {/* <p></p> */}
+        <button></button>
+        <p>Date</p>
+        <p>Report Name</p>
+        <p>Highest Level of Threat</p>
+        <p>No. of IPs Scanned</p>
+        <p>Expiration</p>
+        <a></a>
+      </div>
+    );
+  }
+
+  function formatReport(reportData) {
+    let content;
+    content = Object.keys(reportData).map((key, index) => {
+      const report = reportData[key];
 
       return (
-        <div className="entry" key={index}>
-          <p>{entry.date}</p>
-          <p>{entry.label}</p>
-          <p>{entry.link}</p>
-          <p>{entry.banana}</p>
-          <p>{entry.threat}</p>
+        <div className="report" key={index}>
           <button id={key} onClick={(e) => removeElement(e)}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
+          <p>{formatDate(report.dateofreport)}</p>
+          <p>{report.reportname}</p>
+          <p>{report.highestlevelofthreat}</p>
+          <p>{report.ipsscanned}</p>
+          <p>{report.expirationdate}</p>
+          <Link key={report.uid} to={`/report/${report.uid}`}>
+            <p>View Report</p>
+          </Link>
         </div>
       );
     });
-  } else {
-    content = "No entries found";
+
+    return content;
   }
-  return <div className="entries">{content}</div>;
-};
+
+  formattedContent =
+    Object.keys(data).length > 0
+      ? formatReport(data.data)
+      : "No entries found.";
+
+  return (
+    <>
+      <TableHeader />
+      <div>{formattedContent}</div>
+    </>
+  );
+}
 export default Reports;

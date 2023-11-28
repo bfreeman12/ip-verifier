@@ -1,27 +1,24 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ReportData from "../components/ReportData";
 import Navbar from "../components/Navbar";
+import Reports from "../components/Reports";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import "../styles/report-page.css";
 
-function fetchIps() {
+function fetchReports() {
   return axios
-    .get("http://localhost:3200/getIps")
+    .get("http://localhost:3200/getReports")
     .then((response) => response.data)
     .catch((error) => console.error(error));
 }
 
 export default function ReportPage() {
-  let { uid } = useParams();
-  const [ips, setIps] = useState([]);
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    fetchIps().then((data) => {
-      setIps(data);
-      console.log(data);
+    fetchReports().then((data) => {
+      setReports(data);
     });
   }, []);
 
@@ -29,9 +26,9 @@ export default function ReportPage() {
     <>
       <Navbar />
       <div className="report-body">
-        <h1>Report {uid}</h1>
+        <h1>Reports</h1>
         <div className="ip-report">
-          <ReportData ips={ips} />
+          <Reports data={reports} />
         </div>
       </div>
     </>

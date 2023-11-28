@@ -14,7 +14,7 @@ export default function Navbar() {
           <Link className="link" to="/">
             Home
           </Link>
-          <Link className="link" to="/Reports">
+          <Link className="link" to="/reports">
             Reports
           </Link>
         </div>

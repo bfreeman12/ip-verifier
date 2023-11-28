@@ -1,11 +1,11 @@
 import postgreSQLClient from "../postgres.js";
 
-async function getIps(req, res) {
+async function getReports(req, res) {
   const client = await postgreSQLClient.connect();
   try {
     const query = `
     SELECT *
-    FROM ips
+    FROM reports
   `;
 
     const { rows } = await client.query(query);
@@ -18,4 +18,4 @@ async function getIps(req, res) {
   }
 }
 
-export default getIps;
+export default getReports;

@@ -1,0 +1,62 @@
+.report-body {
+  display: flex;
+  margin-top: 9vh;
+  flex-direction: column;
+  padding-inline: 20vh;
+}
+
+.ip-report {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: #181d25;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #181d25;
+  max-height: 70vh;
+  width: 100%;
+  position: relative;
+}
+.ip-report .header {
+  background: #181d25 !important;
+  position: sticky;
+}
+.ip-report .report {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-inline: 4rem;
+  box-sizing: border-box;
+  transition-duration: 0.2s;
+}
+.ip-report .report p {
+  display: flex;
+  flex: 1;
+  padding-inline: 1rem;
+}
+.ip-report .report a {
+  color: rgba(255, 255, 255, 0.8);
+  width: 8rem;
+  text-decoration: none;
+}
+.ip-report .report a :active {
+  color: #ee6c4d;
+}
+.ip-report .report button {
+  all: unset;
+  width: 1rem;
+  padding-right: 2rem;
+}
+.ip-report .report button svg {
+  pointer-events: none;
+}
+.ip-report .report button:active {
+  color: #ee6c4d;
+}
+.ip-report .report:nth-of-type(even) {
+  background: #293241;
+}
+.ip-report .report:hover {
+  background-color: #3d5a80;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}/*# sourceMappingURL=report-page.css.map */

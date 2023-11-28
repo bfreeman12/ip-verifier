@@ -4,6 +4,10 @@ body {
   margin: 0px;
   overflow: hidden;
   font-weight: 400;
-  background: linear-gradient(0deg, #000000, #131313);
+  background-color: #293241;
   text-transform: capitalize;
+  color: #e0fbfc;
+}
+body a {
+  color: #e0fbfc;
 }/*# sourceMappingURL=app.css.map */
