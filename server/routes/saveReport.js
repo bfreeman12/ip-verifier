@@ -14,26 +14,36 @@ export default function saveReport(scannedIpList) {
     reportName: reportUID,
     expirationDate: expirationDate.toDateString(),
     highestLevelOfThreat: 0,
-    ipsScanned: scannedIpList.length,
+    noOfIpsScanned: scannedIpList.length,
+    scannedIps: [],
   };
 
   for (const scannedIp of scannedIpList) {
-    let currentScannedIp = {
-      reportuid: reportUID,
-      dateofscan: new Date(),
-      expirationdate: expirationDate,
-      ip: scannedIp.data.report.ip,
-      blacklists: scannedIp.data.report.blacklists,
-      information: scannedIp.data.report.information,
-      anonymity: scannedIp.data.report.anonymity,
-      risk_score: scannedIp.data.report.risk_score.result,
-    };
-    if (currentScannedIp.risk_score > highestRisk)
-      highestRisk = currentScannedIp.risk_score;
-    saveIpToDatabase(currentScannedIp, reportUID);
+    if (scannedIp.risk_score > highestRisk) highestRisk = scannedIp.risk_score;
+    try {
+      console.log("NEW ip", scannedIp.data.report.ip);
+      currentReport.scannedIps.push(scannedIp.data.report.ip);
+      let currentScannedIp = {
+        reportuid: reportUID,
+        dateofscan: new Date(),
+        expirationdate: expirationDate,
+        ip: scannedIp.data.report.ip,
+        blacklists: scannedIp.data.report.blacklists,
+        information: scannedIp.data.report.information,
+        anonymity: scannedIp.data.report.anonymity,
+        risk_score: scannedIp.data.report.risk_score.result,
+      };
+      saveIpToDatabase(currentScannedIp, reportUID);
+    } catch {
+      console.log("ip in DB", scannedIp[0].ip);
+      currentReport.scannedIps.push(scannedIp[0].ip);
+    }
   }
+
   currentReport.highestLevelOfThreat = highestRisk;
   saveReportToDatabase(currentReport);
 }
 
-// saveReport(await scanIpList(["12.12.12.14", "13.13.13.15"]));
+saveReport(
+  await scanIpList(["14.14.15.16", "8.8.8.10", "2.2.2.69", "9.8.7.6"])
+);

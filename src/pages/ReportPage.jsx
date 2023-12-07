@@ -10,12 +10,15 @@ import Footer from "../components/Footer";
 
 function fetchIps(reportuid) {
   return axios
-    .get("http://localhost:3200/getIpsByReport", {
+    .get("http://localhost:3200/getIpsByReportScannedIps", {
       params: {
         reportuid: reportuid,
       },
     })
-    .then((response) => response.data)
+    .then((response) => {
+      // console.log(response);
+      response.data;
+    })
     .catch((error) => console.error(error));
 }
 
@@ -25,7 +28,6 @@ export default function ReportPage() {
 
   useEffect(() => {
     fetchIps(uid).then((data) => {
-      setIps(data);
       console.log(data);
     });
   }, []);
@@ -33,12 +35,12 @@ export default function ReportPage() {
   return (
     <>
       <Navbar />
-      <div className="report-body">
+      {/* <div className="report-body">
         <h1>Report {uid}</h1>
         <div className="ip-report">
           <ReportData ips={ips} />
         </div>
-      </div>
+      </div> */}
       <Footer />
     </>
   );

@@ -10,9 +10,10 @@ const saveReportToDatabase = async (report) => {
           reportname,
           expirationdate,
           highestlevelofthreat,
-          ipsscanned
+          noofipsscanned,
+          scannedips
           ) 
-        values($1,$2,$3,$4,$5,$6)
+        values($1,$2,$3,$4,$5,$6,$7)
       RETURNING uid;
       `;
 
@@ -22,7 +23,8 @@ const saveReportToDatabase = async (report) => {
       report.reportName,
       report.expirationDate,
       report.highestLevelOfThreat,
-      report.ipsScanned,
+      report.noOfIpsScanned,
+      report.scannedIps,
     ]);
     client.release();
     return rows[0];

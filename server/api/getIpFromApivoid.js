@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function getIpReputation(ip, apikey) {
+export default function getIpFromApivoid(ip, apikey) {
   return (
     axios
       .get(
@@ -11,7 +11,7 @@ export default function getIpReputation(ip, apikey) {
       )
       // .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         return data.data;
       })
   );

@@ -27,12 +27,15 @@
   padding-inline: 4rem;
   box-sizing: border-box;
   transition-duration: 0.2s;
+  border-bottom: 1px solid #293241;
+}
+.ip-report .report .report-name {
+  word-wrap: break-word;
+  padding-right: 1rem;
 }
 .ip-report .report p {
   display: flex;
   flex: 1;
-  padding-inline: 1rem;
-  border-right: 1px solid #3d5a80;
 }
 .ip-report .report p:last-of-type {
   border-right: none;
@@ -55,9 +58,6 @@
 }
 .ip-report .report button:active {
   color: #ee6c4d;
-}
-.ip-report .report:nth-of-type(even) {
-  background: #293241;
 }
 .ip-report .report:hover {
   background-color: #3d5a80;

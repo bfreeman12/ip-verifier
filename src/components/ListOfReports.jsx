@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import formatDate from "../functions/formatDate";
 
-function Reports(data) {
+function ListOfReports(data) {
   let formattedContent;
 
   function removeElement(e) {
@@ -21,7 +21,7 @@ function Reports(data) {
         {/* <p></p> */}
         <button></button>
         <p>Date</p>
-        <p>Report Name</p>
+        <p className="report-name">Report Name</p>
         <p>Highest Level of Threat</p>
         <p>No. of IPs Scanned</p>
         <p>Expiration</p>
@@ -41,9 +41,9 @@ function Reports(data) {
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
           <p>{formatDate(report.dateofreport)}</p>
-          <p>{report.reportname}</p>
+          <p className="report-name">{report.reportname}</p>
           <p>{report.highestlevelofthreat}</p>
-          <p>{report.ipsscanned}</p>
+          <p>{report.noofipsscanned}</p>
           <p>{report.expirationdate}</p>
           <Link key={report.uid} to={`/report/${report.uid}`}>
             <p>View Report</p>
@@ -67,4 +67,4 @@ function Reports(data) {
     </>
   );
 }
-export default Reports;
+export default ListOfReports;

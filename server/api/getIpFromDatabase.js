@@ -1,8 +1,7 @@
 import postgreSQLClient from "../postgres.js";
 
-const getIp = async (req, res) => {
+const getIpFromDatabase = async (ip) => {
   const client = await postgreSQLClient.connect();
-  const { ip } = req.query;
 
   try {
     const query = `
@@ -13,16 +12,15 @@ const getIp = async (req, res) => {
 
     const { rows } = await client.query(query, [ip]);
 
+    // console.log(rows);
     client.release();
-    res.json(rows);
+    return rows;
   } catch (error) {
-    res.status(400).send({
-      message: error.message,
-    });
+    console.log(error);
     client.release();
   }
 };
 
-// console.log(await getIp({ query: { ip: "8.8.8.8" } }));
+// console.log(await getIp("8.8.8.8"));
 
-export default getIp;
+export default getIpFromDatabase;

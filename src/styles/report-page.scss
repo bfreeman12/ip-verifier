@@ -35,11 +35,16 @@ $highlight: #ee6c4d;
     padding-inline: 4rem;
     box-sizing: border-box;
     transition-duration: 0.2s;
+    border-bottom: 1px solid $darker;
+    .report-name {
+      word-wrap: break-word;
+      padding-right: 1rem;
+    }
     p {
       display: flex;
       flex: 1;
-      padding-inline: 1rem;
-      border-right: 1px solid $dark;
+      // padding-inline: 1rem;
+      // border-right: 1px solid $dark;
     }
     p:last-of-type {
       border-right: none;
@@ -65,9 +70,9 @@ $highlight: #ee6c4d;
       color: $highlight;
     }
   }
-  .report:nth-of-type(even) {
-    background: $darker;
-  }
+  // .report:nth-of-type(even) {
+  //   background: $darker;
+  // }
   .report:hover {
     background-color: $dark;
     transition-duration: 0.2s;

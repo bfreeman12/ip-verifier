@@ -1,10 +1,9 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Reports from "../components/Reports";
+import ListOfReports from "../components/ListOfReports";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import "../styles/report-page.css";
 
 function fetchReports() {
@@ -29,7 +28,7 @@ export default function ReportPage() {
       <div className="report-body">
         <h1>Reports</h1>
         <div className="ip-report">
-          <Reports data={reports} />
+          <ListOfReports data={reports} />
         </div>
       </div>
       <Footer />

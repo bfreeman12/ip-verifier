@@ -1,5 +1,6 @@
 import React from "react";
 import formatDate from "../functions/formatDate";
+import { Link } from "react-router-dom";
 
 function ReportData(ips) {
   let formattedContent = [];
@@ -24,13 +25,15 @@ function ReportData(ips) {
       const scan = scannedIPs.ips[key];
 
       return (
-        <div className="report" key={index}>
-          <p>{formatDate(scan.dateofscan)}</p>
-          <p>{scan.ip}</p>
-          <p>{scan.blacklists.detections}</p>
-          <p>{scan.risk_score}</p>
-          <p>{formatDate(scan.expirationdate)}</p>
-        </div>
+        <Link key={scan.ip} to={`/single-ip/${scan.ip}/`}>
+          <div className="report">
+            <p>{formatDate(scan.dateofscan)}</p>
+            <p>{scan.ip}</p>
+            <p>{scan.blacklists.detections}</p>
+            <p>{scan.risk_score}</p>
+            <p>{formatDate(scan.expirationdate)}</p>
+          </div>
+        </Link>
       );
     });
 
@@ -42,8 +45,6 @@ function ReportData(ips) {
 
   return (
     <>
-      {/* horrible practice. This first report is a spacer. */}
-      <div className="report"></div>
       <TableHeader />
       <div>{formattedContent}</div>
     </>
