@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import formatDate from "../functions/formatDate";
 import "../styles/single-ip.css";
 
-function fetchIp(ip) {
+async function fetchIp(ip) {
   return axios
     .get("http://localhost:3200/getIp", {
       params: {

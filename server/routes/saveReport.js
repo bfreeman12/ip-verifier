@@ -44,6 +44,6 @@ export default function saveReport(scannedIpList) {
   saveReportToDatabase(currentReport);
 }
 
-saveReport(
-  await scanIpList(["14.14.15.16", "8.8.8.10", "2.2.2.69", "9.8.7.6"])
-);
+// saveReport(
+//   await scanIpList(["14.14.15.16", "8.8.8.10", "2.2.2.69", "9.8.7.6"])
+// );

@@ -8,17 +8,14 @@ import axios from "axios";
 import "../styles/report-page.css";
 import Footer from "../components/Footer";
 
-function fetchIps(reportuid) {
+async function fetchReport(uid) {
   return axios
-    .get("http://localhost:3200/getIpsByReportScannedIps", {
+    .get(`http://localhost:3200/getReport`, {
       params: {
-        reportuid: reportuid,
+        uid: uid,
       },
     })
-    .then((response) => {
-      // console.log(response);
-      response.data;
-    })
+    .then((response) => response.data)
     .catch((error) => console.error(error));
 }
 
@@ -27,8 +24,9 @@ export default function ReportPage() {
   const [ips, setIps] = useState([]);
 
   useEffect(() => {
-    fetchIps(uid).then((data) => {
+    fetchReport(uid).then((data) => {
       console.log(data);
+      setIps(data);
     });
   }, []);
 

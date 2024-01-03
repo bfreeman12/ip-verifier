@@ -1,4 +1,4 @@
-import postgreSQLClient from "../postgres.js";
+import postgreSQLClient from "../server/postgres.js";
 
 // function parseIpString(ipString) {
 //   // Remove the curly braces and split the string by comma
