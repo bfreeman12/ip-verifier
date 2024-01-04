@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/report-page.css";
 
-function fetchReports() {
+async function fetchReports() {
   return axios
     .get("http://localhost:3200/getReports")
     .then((response) => response.data)

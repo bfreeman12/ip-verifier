@@ -21,6 +21,7 @@ export default function AllIps() {
 
   useEffect(() => {
     fetchIps().then((data) => {
+      console.log(data);
       setIps(data);
       console.log(data);
     });

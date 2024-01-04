@@ -13,12 +13,14 @@ async function getReport(req, res) {
 
     const { rows } = await client.query(query, [uid]); // Pass 'uid' as a parameter
 
+    if (rows.length > 0) {
+      res.json(rows[0]); // Send the first (and presumably only) row
+    } else {
+      res.status(404).send("Report not found");
+    }
     client.release();
-    res.json(rows);
   } catch (error) {
-    res.status(400).send({
-      message: error.message,
-    });
+    console.log(error);
     client.release();
   }
 }
