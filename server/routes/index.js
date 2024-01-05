@@ -8,6 +8,7 @@ import scanIpList from "./scanIpList.js";
 import getReports from "./getReports.js";
 import getIp from "./getIp.js";
 import getReport from "./getReport.js";
+import handleFileUpload from "./handleFileUpload.js";
 
 const routes = express.Router();
 
@@ -18,5 +19,6 @@ routes.get("/getReport", getReport);
 routes.get("/getReports", getReports);
 routes.get("/getIpsByReport", getIpsByReport);
 routes.get("/getIpsByReportScannedIps", getIpsByReportScannedIps);
+routes.post("/handleFileUpload", handleFileUpload);
 
 export default routes;

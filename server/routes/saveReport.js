@@ -2,6 +2,7 @@ import saveReportToDatabase from "../api/saveReportToDatabase.js";
 import saveIpToDatabase from "../api/saveIpToDatabase.js";
 import scanIpList from "./scanIpList.js";
 import { v4 as uuidv4 } from "uuid";
+import formatDate from "../../client/functions/formatDate.js";
 
 export default function saveReport(scannedIpList) {
   let reportUID = uuidv4();
@@ -11,7 +12,7 @@ export default function saveReport(scannedIpList) {
   let currentReport = {
     uid: reportUID,
     dateOfReport: new Date(),
-    reportName: reportUID,
+    reportName: formatDate(new Date()) + " Report",
     expirationDate: expirationDate.toDateString(),
     highestLevelOfThreat: 0,
     noOfIpsScanned: scannedIpList.length,
@@ -35,6 +36,7 @@ export default function saveReport(scannedIpList) {
       };
       saveIpToDatabase(currentScannedIp, reportUID);
     } catch {
+      // console.log(scannedIp);
       console.log("ip in DB", scannedIp[0].ip);
       currentReport.scannedIps.push(scannedIp[0].ip);
     }
