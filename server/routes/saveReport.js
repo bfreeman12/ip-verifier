@@ -1,46 +1,55 @@
 import saveReportToDatabase from "../api/saveReportToDatabase.js";
 import saveIpToDatabase from "../api/saveIpToDatabase.js";
-import scanIpList from "./scanIpList.js";
 import { v4 as uuidv4 } from "uuid";
 import formatDate from "../../client/functions/formatDate.js";
 
 export default function saveReport(scannedIpList) {
-  let reportUID = uuidv4();
-  let expirationDate = new Date(new Date().setMonth(new Date().getMonth() + 3));
+  const reportUID = uuidv4();
+  const expirationDate = new Date(
+    new Date().setMonth(new Date().getMonth() + 3)
+  ).toDateString();
   let highestRisk = 0;
 
-  let currentReport = {
+  const currentReport = {
     uid: reportUID,
     dateOfReport: new Date(),
     reportName: formatDate(new Date()) + " Report",
-    expirationDate: expirationDate.toDateString(),
+    expirationDate,
     highestLevelOfThreat: 0,
     noOfIpsScanned: scannedIpList.length,
     scannedIps: [],
   };
 
-  for (const scannedIp of scannedIpList) {
-    if (scannedIp.risk_score > highestRisk) highestRisk = scannedIp.risk_score;
-    try {
-      console.log("NEW ip", scannedIp.data.report.ip);
-      currentReport.scannedIps.push(scannedIp.data.report.ip);
-      let currentScannedIp = {
+  scannedIpList.forEach((scannedIp) => {
+    let isIpInDatabase = false;
+    if (scannedIp.length && scannedIp[0].ip) isIpInDatabase = true;
+
+    let ipData;
+    let riskScore = 0;
+    if (isIpInDatabase) {
+      ipData = scannedIp[0];
+      riskScore = parseInt(scannedIp[0].risk_score);
+    } else {
+      ipData = scannedIp.data.report;
+      riskScore = parseInt(scannedIp.data.report.risk_score.result);
+    }
+
+    highestRisk = Math.max(highestRisk, riskScore);
+
+    currentReport.scannedIps.push(ipData.ip);
+
+    if (!isIpInDatabase) {
+      const currentScannedIp = {
         reportuid: reportUID,
         dateofscan: new Date(),
         expirationdate: expirationDate,
-        ip: scannedIp.data.report.ip,
-        blacklists: scannedIp.data.report.blacklists,
-        information: scannedIp.data.report.information,
-        anonymity: scannedIp.data.report.anonymity,
-        risk_score: scannedIp.data.report.risk_score.result,
+        ...ipData,
+        risk_score: riskScore,
       };
+
       saveIpToDatabase(currentScannedIp, reportUID);
-    } catch {
-      // console.log(scannedIp);
-      console.log("ip in DB", scannedIp[0].ip);
-      currentReport.scannedIps.push(scannedIp[0].ip);
     }
-  }
+  });
 
   currentReport.highestLevelOfThreat = highestRisk;
   saveReportToDatabase(currentReport);
