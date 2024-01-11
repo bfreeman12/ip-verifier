@@ -1,21 +1,21 @@
-$darkest: #181d25;
-$darker: #293241;
-$dark: #3d5a80;
-$light: #98c1d9;
-$lighter: #e0fbfc;
-$highlight: #ee6c4d;
+$darkest: hsl(207, 18%, 5%);
+$darker: hsl(207, 18%, 22%);
+$dark: #636f7e;
+$light: #d8dfe4;
+$lighter: #f3fafa;
+$highlight: #98c1d9;
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  @font-face {
+    font-family: nunito;
+    src: url(../media/Nunito-VariableFont_wght.ttf);
+  }
+  font-family: nunito;
   min-height: 100dvh;
   margin: 0px;
-  // width: 100vw;
-  // overflow: hidden;
   font-weight: 400;
-  background-color: $darker;
-  text-transform: capitalize;
-  color: $lighter;
+  background-color: $darkest;
+  color: $light;
   a {
     color: $lighter;
   }

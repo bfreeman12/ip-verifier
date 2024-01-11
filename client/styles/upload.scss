@@ -1,13 +1,27 @@
-$darkest: #181d25;
-$darker: #293241;
-$dark: #3d5a80;
-$light: #98c1d9;
-$lighter: #e0fbfc;
-$highlight: #ee6c4d;
+$darkest: hsl(207, 18%, 5%);
+$darker: hsl(207, 18%, 22%);
+$dark: #636f7e;
+$light: #d8dfe4;
+$lighter: #f3fafa;
+$highlight: #98c1d9;
+
+.upload {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  p {
+    margin: 0px;
+  }
+  .upload-subtitle {
+    text-align: center;
+  }
+}
 
 .file-upload-container {
-  background-color: rgba(255, 255, 255, 0.192);
-  // border: 1px dashed black;
+  background-color: $darker;
   display: flex;
   border-radius: 5px;
   align-items: center;
@@ -15,9 +29,8 @@ $highlight: #ee6c4d;
 
   label {
     height: 100%;
-    width: 250px;
     user-select: none;
-    padding-left: 1rem;
+    padding-inline: 1rem;
     display: flex;
     align-items: center;
     border-top-left-radius: 5px;
@@ -31,7 +44,7 @@ $highlight: #ee6c4d;
 
   label:hover {
     color: $darkest;
-    background-color: $light;
+    background-color: $highlight;
   }
   label:active {
     background-color: rgba(161, 161, 161, 0.723);

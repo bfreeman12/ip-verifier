@@ -1,9 +1,9 @@
-$darkest: #181d25;
-$darker: #293241;
-$dark: #3d5a80;
-$light: #98c1d9;
-$lighter: #e0fbfc;
-$highlight: #ee6c4d;
+$darkest: hsl(207, 18%, 5%);
+$darker: hsl(207, 18%, 22%);
+$dark: #636f7e;
+$light: #d8dfe4;
+$lighter: #f3fafa;
+$highlight: #98c1d9;
 
 .footer {
   height: 2rem;
@@ -11,9 +11,11 @@ $highlight: #ee6c4d;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $darkest;
+  // background-color: $darker;
   position: fixed;
   left: 0px;
   bottom: 0px;
   margin: 0px;
+  background: hsla(0, 0%, 100%, 0.04);
+  backdrop-filter: blur(10px);
 }

@@ -1,19 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import formatDate from "../functions/formatDate";
+import axios from "axios";
 
-function ListOfReports(data) {
+const ListOfReports = ({ reports, deleteReport }) => {
+  const [editableReportName, setEditableReportName] = useState();
   let formattedContent;
-
-  function removeElement(e) {
-    e.preventDefault();
-    const targetIndex = e.target.id;
-    const newData = { ...data };
-    delete newData[targetIndex];
-    setData(newData);
-  }
 
   function TableHeader() {
     return (
@@ -32,17 +26,75 @@ function ListOfReports(data) {
 
   function formatReport(reportData) {
     let content;
+    console.log(reportData);
+
     content = Object.keys(reportData).map((key, index) => {
       const report = reportData[key];
+      let threatLevel = "low-threat";
+      if (
+        report.highestlevelofthreat > 1 &&
+        report.highestlevelofthreat <= 33
+      ) {
+        threatLevel = "mid-threat";
+      }
+      if (
+        report.highestlevelofthreat > 33 &&
+        report.highestlevelofthreat <= 66
+      ) {
+        threatLevel = "high-threat";
+      }
+      if (
+        report.highestlevelofthreat > 66 &&
+        report.highestlevelofthreat <= 100
+      ) {
+        threatLevel = "crit-threat";
+      }
+
+      const handleNameChange = async (reportUid, newName) => {
+        if (
+          window.confirm("Are you sure you would like to rename this report?")
+        ) {
+          try {
+            await axios.patch("http://172.16.220.218:3200/updateReport", {
+              params: {
+                uid: reportUid,
+                reportName: newName,
+              },
+            });
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      };
 
       return (
         <div className="report" key={index}>
-          <button id={key} onClick={(e) => removeElement(e)}>
+          <button
+            id={key}
+            onClick={() => {
+              deleteReport(report.uid);
+            }}
+          >
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
           <p>{formatDate(report.dateofreport)}</p>
-          <p className="report-name">{report.reportname}</p>
-          <p>{report.highestlevelofthreat}</p>
+          <p
+            id={report.uid}
+            className="report-name"
+            contentEditable="true"
+            onBlur={(e) => {
+              setEditableReportName(e.target.innerText);
+            }}
+            suppressContentEditableWarning={true}
+          >
+            {report.reportname || editableReportName}
+          </p>
+          <button
+            onClick={() => handleNameChange(report.uid, editableReportName)}
+          >
+            ✓
+          </button>
+          <p className={threatLevel}>{report.highestlevelofthreat}</p>
           <p>{report.noofipsscanned}</p>
           <p>{report.expirationdate}</p>
           <Link key={report.uid} to={`/report/${report.uid}`}>
@@ -56,8 +108,8 @@ function ListOfReports(data) {
   }
 
   formattedContent =
-    Object.keys(data).length > 0
-      ? formatReport(data.data)
+    reports && Object.keys(reports).length > 0
+      ? formatReport(reports)
       : "No entries found.";
 
   return (
@@ -66,5 +118,5 @@ function ListOfReports(data) {
       <div>{formattedContent}</div>
     </>
   );
-}
+};
 export default ListOfReports;

@@ -10,7 +10,7 @@ import Footer from "../components/Footer";
 
 function fetchIps() {
   return axios
-    .get("http://localhost:3200/getIps")
+    .get("http://172.16.220.218:3200/getIps")
     .then((response) => response.data)
     .catch((error) => console.error(error));
 }
@@ -21,9 +21,7 @@ export default function AllIps() {
 
   useEffect(() => {
     fetchIps().then((data) => {
-      console.log(data);
       setIps(data);
-      console.log(data);
     });
   }, []);
 

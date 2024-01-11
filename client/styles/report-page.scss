@@ -1,9 +1,9 @@
-$darkest: #181d25;
-$darker: #293241;
-$dark: #3d5a80;
-$light: #98c1d9;
-$lighter: #e0fbfc;
-$highlight: #ee6c4d;
+$darkest: hsl(207, 18%, 5%);
+$darker: hsl(207, 18%, 22%);
+$dark: #636f7e;
+$light: #d8dfe4;
+$lighter: #f3fafa;
+$highlight: #98c1d9;
 
 .report-body {
   display: flex;
@@ -11,17 +11,30 @@ $highlight: #ee6c4d;
   flex-direction: column;
   padding-inline: 20vh;
 }
+h4 {
+  margin: 0px;
+  font-weight: 200;
+}
+h1 {
+  margin-bottom: 0px;
+}
 
 .ip-report {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   background: $darkest;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  // box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid $darkest;
-  max-height: 70vh;
+  // max-height: 70vh;
+  margin-bottom: 10vh;
   width: 100%;
   position: relative;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+
+  a {
+    text-decoration: none;
+  }
 
   .header {
     background: $darkest !important;
@@ -49,6 +62,7 @@ $highlight: #ee6c4d;
     p:last-of-type {
       border-right: none;
     }
+
     a {
       color: rgba(255, 255, 255, 0.8);
       width: 8rem;
@@ -70,16 +84,30 @@ $highlight: #ee6c4d;
       color: $highlight;
     }
   }
-  // .report:nth-of-type(even) {
-  //   background: $darker;
-  // }
+  .report:nth-of-type(odd) {
+    background: hsla(0, 0%, 100%, 0.01);
+  }
+  .report:nth-of-type(even) {
+    background: hsla(0, 0%, 100%, 0.01);
+  }
   .report:hover {
     background-color: $dark;
     transition-duration: 0.2s;
     cursor: pointer;
   }
 }
-
+.low-threat {
+  color: $lighter;
+}
+.mid-threat {
+  color: hsl(60, 100%, 68%);
+}
+.high-threat {
+  color: hsl(39, 100%, 68%);
+}
+.crit-threat {
+  color: hsl(0, 100%, 68%);
+}
 // 22223b
 // 4a4e69
 // 9a8c98

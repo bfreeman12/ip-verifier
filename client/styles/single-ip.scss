@@ -1,9 +1,9 @@
-$darkest: #181d25;
-$darker: #293241;
-$dark: #3d5a80;
-$light: #98c1d9;
-$lighter: #e0fbfc;
-$highlight: #ee6c4d;
+$darkest: hsl(207, 18%, 5%);
+$darker: hsl(207, 18%, 22%);
+$dark: #636f7e;
+$light: #d8dfe4;
+$lighter: #f3fafa;
+$highlight: #98c1d9;
 .page-container {
   position: relative;
   margin-top: 9vh;
@@ -33,6 +33,9 @@ $highlight: #ee6c4d;
   margin-bottom: 2rem;
   border-radius: 5px;
   border: 1px solid $darker;
+  h1 {
+    margin: 0px;
+  }
 }
 
 .title-panel {

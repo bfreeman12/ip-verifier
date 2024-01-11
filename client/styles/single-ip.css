@@ -23,11 +23,14 @@
 }
 
 .panel {
-  background-color: #181d25;
+  background-color: hsl(207, 18%, 5%);
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 5px;
-  border: 1px solid #293241;
+  border: 1px solid hsl(207, 18%, 22%);
+}
+.panel h1 {
+  margin: 0px;
 }
 
 .title-panel {
@@ -59,14 +62,14 @@
   gap: 1rem;
 }
 .blacklists-panel .blacklist-entry {
-  background-color: #293241;
+  background-color: hsl(207, 18%, 22%);
   padding: 1rem;
-  border: 1px solid #293241;
+  border: 1px solid hsl(207, 18%, 22%);
   border-radius: 5px;
 }
 
 .information-panel {
-  background-color: #181d25;
+  background-color: hsl(207, 18%, 5%);
   display: flex;
   flex: 1;
   flex-direction: column;

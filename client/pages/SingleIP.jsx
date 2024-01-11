@@ -9,7 +9,7 @@ import "../styles/single-ip.css";
 
 async function fetchIp(ip) {
   return axios
-    .get("http://localhost:3200/getIp", {
+    .get("http://172.16.220.218:3200/getIp", {
       params: {
         ip: ip,
       },

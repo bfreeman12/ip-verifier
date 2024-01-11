@@ -1,0 +1,63 @@
+.whole {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  gap: 1rem;
+}
+
+.half {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+}
+
+.single-ip-lookup {
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  background: hsla(0, 0%, 100%, 0.01);
+  height: 100%;
+  gap: 1rem;
+}
+.single-ip-lookup h3 {
+  margin-bottom: 0px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+input {
+  display: flex;
+  flex: 1;
+  background: hsl(207, 18%, 5%);
+  border: 1px solid hsl(207, 18%, 22%);
+  height: 2rem;
+  color: white;
+  border-radius: 4px;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 2rem;
+  background: hsla(0, 0%, 100%, 0.01);
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+.block h3 {
+  font-size: 1rem;
+  padding-left: 0px;
+  padding: 0px;
+  margin: 0px 0px 1rem 0px;
+}
+.block p {
+  margin: 0px;
+}/*# sourceMappingURL=single-ip-lookup.css.map */

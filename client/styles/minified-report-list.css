@@ -1,7 +1,6 @@
 .report-body {
   display: flex;
   margin-top: 9vh;
-  flex-direction: column;
   padding-inline: 20vh;
 }
 
@@ -14,26 +13,18 @@ h1 {
   margin-bottom: 0px;
 }
 
-.ip-report {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  background: hsl(207, 18%, 5%);
-  border: 1px solid hsl(207, 18%, 5%);
-  margin-bottom: 10vh;
-  width: 100%;
-  position: relative;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-}
-.ip-report a {
+a {
   text-decoration: none;
 }
-.ip-report .header {
+
+.header {
   background: hsl(207, 18%, 5%) !important;
   position: sticky;
 }
-.ip-report .report {
+
+.report {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   padding-inline: 4rem;
@@ -41,43 +32,46 @@ h1 {
   transition-duration: 0.2s;
   border-bottom: 1px solid hsl(207, 18%, 22%);
 }
-.ip-report .report .report-name {
+.report .report-name {
   word-wrap: break-word;
   padding-right: 1rem;
 }
-.ip-report .report p {
+.report p {
   display: flex;
   flex: 1;
 }
-.ip-report .report p:last-of-type {
+.report p:last-of-type {
   border-right: none;
 }
-.ip-report .report a {
+.report a {
   color: rgba(255, 255, 255, 0.8);
   width: 8rem;
   text-decoration: none;
 }
-.ip-report .report a :active {
+.report a :active {
   color: #98c1d9;
 }
-.ip-report .report button {
+.report button {
   all: unset;
   width: 1rem;
   padding-right: 2rem;
 }
-.ip-report .report button svg {
+.report button svg {
   pointer-events: none;
 }
-.ip-report .report button:active {
+.report button:active {
   color: #98c1d9;
 }
-.ip-report .report:nth-of-type(odd) {
+
+.report:nth-of-type(odd) {
   background: hsla(0, 0%, 100%, 0.01);
 }
-.ip-report .report:nth-of-type(even) {
+
+.report:nth-of-type(even) {
   background: hsla(0, 0%, 100%, 0.01);
 }
-.ip-report .report:hover {
+
+.report:hover {
   background-color: #636f7e;
   transition-duration: 0.2s;
   cursor: pointer;
@@ -97,4 +91,4 @@ h1 {
 
 .crit-threat {
   color: hsl(0, 100%, 68%);
-}/*# sourceMappingURL=report-page.css.map */
+}/*# sourceMappingURL=minified-report-list.css.map */

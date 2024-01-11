@@ -19,7 +19,7 @@ function formatListOfIPs(text) {
 
 async function fetchReport(uid) {
   return axios
-    .get(`http://localhost:3200/getReport`, {
+    .get(`http://172.16.220.218:3200/getReport`, {
       params: {
         uid: uid,
       },
@@ -29,7 +29,7 @@ async function fetchReport(uid) {
 }
 async function fetchIp(ip) {
   return axios
-    .get("http://localhost:3200/getIp", {
+    .get("http://172.16.220.218:3200/getIp", {
       params: {
         ip: ip,
       },
@@ -41,10 +41,14 @@ async function fetchIp(ip) {
 export default function ReportPage() {
   let { uid } = useParams();
   const [ips, setIps] = useState([]);
+  const [reportName, setReportName] = useState([]);
+  const [rawReportData, setReportData] = useState([]);
 
   useEffect(() => {
     fetchReport(uid).then(async (data) => {
       console.log(data);
+      setReportName(data.reportname);
+      setReportData(data);
       let listOfIPs = ["8.8.8.8"];
       if (data != undefined) {
         listOfIPs = formatListOfIPs(data.scannedips);
@@ -63,7 +67,8 @@ export default function ReportPage() {
     <>
       <Navbar />
       <div className="report-body">
-        <h1>Report {uid}</h1>
+        <h1>Report {reportName}</h1>
+        <h4>{rawReportData.uid}</h4>
         <div className="ip-report">
           <ReportData ips={ips} />
         </div>

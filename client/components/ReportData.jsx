@@ -22,15 +22,24 @@ function ReportData(ips) {
     // console.log(scannedIPs, scannedIPs.ips);
     let content;
     content = Object.keys(scannedIPs.ips).map((key, index) => {
+      let threatLevel = "low-threat";
       const scan = scannedIPs.ips[key];
-
+      if (scan.risk_score > 1 && scan.risk_score <= 33) {
+        threatLevel = "mid-threat";
+      }
+      if (scan.risk_score > 33 && scan.risk_score <= 66) {
+        threatLevel = "high-threat";
+      }
+      if (scan.risk_score > 66 && scan.risk_score <= 100) {
+        threatLevel = "crit-threat";
+      }
       return (
         <Link key={scan.ip} to={`/single-ip/${scan.ip}/`}>
           <div className="report">
             <p>{formatDate(scan.dateofscan)}</p>
             <p>{scan.ip}</p>
             <p>{scan.blacklists.detections}</p>
-            <p>{scan.risk_score}</p>
+            <p className={threatLevel}>{scan.risk_score}</p>
             <p>{formatDate(scan.expirationdate)}</p>
           </div>
         </Link>
