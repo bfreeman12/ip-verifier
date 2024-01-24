@@ -14,6 +14,65 @@ h1 {
   margin-bottom: 0px;
 }
 
+button,
+option,
+select {
+  border: none;
+  background: none;
+  color: #d8dfe4;
+  height: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.buttons button {
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  flex: auto;
+  height: 2rem;
+}
+
+.pagination-controls {
+  display: flex;
+  height: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.go-to-page {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.go-to-page input {
+  border: none;
+  background: none;
+  color: black;
+}
+
+th {
+  text-align: left;
+  border-bottom: 1px solid hsl(207, 18%, 22%);
+  padding-left: 1rem;
+}
+
+tr {
+  height: 3rem;
+}
+
+td {
+  padding-left: 1rem;
+}
+
+tr:nth-of-type(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
 .ip-report {
   display: flex;
   flex-direction: column;

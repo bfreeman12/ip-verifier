@@ -8,15 +8,10 @@ export default async function scanIpList(iplist) {
     let queriedIp = await getIpFromDatabase(ip);
     if (queriedIp.length == 0) {
       const apiVoidIp = await getIpFromApivoid(ip, apikey);
-      // console.log("start", apiVoidIp.data.report, "end");
       scannedIpList.push(apiVoidIp.data.report);
-      // console.log(scannedIpList);
     } else {
       scannedIpList.push(queriedIp[0]);
-      // console.log(scannedIpList);
     }
   }
   return scannedIpList;
 }
-
-// console.log(await scanIpList(["69.69.69.69"]));

@@ -52,10 +52,8 @@ export default async function saveReport(scannedIpList) {
     }
     highestRisk = Math.max(highestRisk, riskScore);
 
-    if (isIpInDatabase(scannedIp)) {
-      if (isIpExpired(scannedIp)) {
-        replaceIpInDatabase(scannedIp, reportUID);
-      }
+    if (isIpInDatabase(scannedIp) && isIpExpired(scannedIp)) {
+      replaceIpInDatabase(scannedIp, reportUID);
     }
 
     if (!isIpInDatabase(scannedIp)) {
