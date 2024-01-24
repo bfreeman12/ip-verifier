@@ -1,122 +1,178 @@
-import React, { useState } from "react";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import React, { useMemo, useState } from "react";
 import formatDate from "../functions/formatDate";
-import axios from "axios";
+import { useTable, usePagination } from "react-table";
+import { Link } from "react-router-dom";
 
-const ListOfReports = ({ reports, deleteReport }) => {
-  const [editableReportName, setEditableReportName] = useState();
-  let formattedContent;
+//ChatGPT got this working. Please don't break it. <3
 
-  function TableHeader() {
-    return (
-      <div className="report header">
-        {/* <p></p> */}
-        <button></button>
-        <p>Date</p>
-        <p className="report-name">Report Name</p>
-        <p>Highest Level of Threat</p>
-        <p>No. of IPs Scanned</p>
-        <p>Expiration</p>
-        <a></a>
-      </div>
-    );
-  }
+function ListOfReports(reports) {
+  const [filterInput, setFilterInput] = useState("");
 
-  function formatReport(reportData) {
-    let content;
-    console.log(reportData);
-
-    content = Object.keys(reportData).map((key, index) => {
-      const report = reportData[key];
-      let threatLevel = "low-threat";
-      if (
-        report.highestlevelofthreat > 1 &&
-        report.highestlevelofthreat <= 33
-      ) {
-        threatLevel = "mid-threat";
-      }
-      if (
-        report.highestlevelofthreat > 33 &&
-        report.highestlevelofthreat <= 66
-      ) {
-        threatLevel = "high-threat";
-      }
-      if (
-        report.highestlevelofthreat > 66 &&
-        report.highestlevelofthreat <= 100
-      ) {
-        threatLevel = "crit-threat";
-      }
-
-      const handleNameChange = async (reportUid, newName) => {
-        if (
-          window.confirm("Are you sure you would like to rename this report?")
-        ) {
-          try {
-            await axios.patch("http://172.16.220.218:3200/updateReport", {
-              params: {
-                uid: reportUid,
-                reportName: newName,
-              },
-            });
-          } catch (error) {
-            console.error(error);
-          }
-        }
-      };
-
-      return (
-        <div className="report" key={index}>
-          <button
-            id={key}
-            onClick={() => {
-              deleteReport(report.uid);
-            }}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </button>
-          <p>{formatDate(report.dateofreport)}</p>
-          <p
-            id={report.uid}
-            className="report-name"
-            contentEditable="true"
-            onBlur={(e) => {
-              setEditableReportName(e.target.innerText);
-            }}
-            suppressContentEditableWarning={true}
-          >
-            {report.reportname || editableReportName}
-          </p>
-          <button
-            onClick={() => handleNameChange(report.uid, editableReportName)}
-          >
-            ✎
-          </button>
-          <p className={threatLevel}>{report.highestlevelofthreat}</p>
-          <p>{report.noofipsscanned}</p>
-          <p>{report.expirationdate}</p>
-          <Link key={report.uid} to={`/report/${report.uid}`}>
-            <p>View Report</p>
-          </Link>
-        </div>
+  const data = React.useMemo(
+    () =>
+      Object.keys(reports.reports).map((key) => ({
+        ...reports.reports[key],
+        // threatLevel: getThreatLevel(reports.reports[key].risk_score),
+        date: formatDate(reports.reports[key].dateofreport),
+        expiration: formatDate(reports.reports[key].expirationdate),
+      })),
+    [reports]
+  );
+  const filteredData = React.useMemo(() => {
+    if (!filterInput) return data;
+    return data.filter((row) => {
+      // Assuming you want to search across all fields
+      return Object.values(row).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(filterInput.toLowerCase())
       );
     });
+  }, [data, filterInput]);
 
-    return content;
-  }
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Date",
+        accessor: "date", // accessor is the "key" in the data
+      },
+      {
+        Header: "Report Name",
+        accessor: "reportname",
+      },
+      {
+        Header: "Highest Level of Threat",
+        accessor: "highestlevelofthreat",
+        Cell: ({ value }) => (
+          <div className={getThreatLevel(value)}>{value}</div>
+        ),
+      },
+      {
+        Header: "No. of IPs Scanned",
+        accessor: "noofipsscanned",
+      },
+      {
+        Header: "Expiration",
+        accessor: "expirationdate",
+      },
+      {
+        Header: "Actions",
+        id: "actions",
+        Cell: ({ row }) => (
+          <Link to={`/report/${row.original.uid}`}>View Report</Link>
+        ),
+      },
+    ],
+    []
+  );
 
-  formattedContent =
-    reports && Object.keys(reports).length > 0
-      ? formatReport(reports)
-      : "No entries found.";
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page, // Instead of using 'rows', we use page
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+  } = useTable({ columns, data: filteredData }, usePagination);
 
+  // Render the UI for your table
   return (
     <>
-      <TableHeader />
-      <div>{formattedContent}</div>
+      <input
+        className="search-bar"
+        value={filterInput}
+        onChange={(e) => setFilterInput(e.target.value)}
+        placeholder={"Search"}
+      />
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()} className="table-header">
+                  {column.render("Header")}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((row) => {
+            prepareRow(row);
+            return (
+              // <Link key={row.original.ip} to={`/single-ip/${row.original.ip}/`}>
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+              // </Link>
+            );
+          })}
+        </tbody>
+      </table>
+      <div className="pagination-controls">
+        <div className="buttons">
+          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            {"<<"}
+          </button>
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            {"<"}
+          </button>
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            {">"}
+          </button>
+          <button
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {">>"}
+          </button>
+        </div>
+        <span>
+          Page{" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <select
+          value={pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+      {Object.keys(reports).length === 0 && <div>No entries found.</div>}
     </>
   );
-};
+}
+
+function getThreatLevel(riskScore) {
+  if (riskScore > 66) {
+    return "crit-threat";
+  } else if (riskScore > 33) {
+    return "high-threat";
+  } else if (riskScore > 1) {
+    return "mid-threat";
+  } else {
+    return "low-threat";
+  }
+}
+
 export default ListOfReports;
