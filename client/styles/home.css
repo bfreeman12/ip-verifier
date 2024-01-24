@@ -17,6 +17,10 @@
   height: 100%;
   flex-direction: column;
 }
+.home-body .upload {
+  flex: 0;
+  padding-bottom: 4rem;
+}
 
 .widget-wrapper {
   display: flex;

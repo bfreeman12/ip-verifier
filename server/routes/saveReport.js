@@ -2,8 +2,29 @@ import saveReportToDatabase from "../api/saveReportToDatabase.js";
 import saveIpToDatabase from "../api/saveIpToDatabase.js";
 import { v4 as uuidv4 } from "uuid";
 import formatDate from "../../client/functions/formatDate.js";
+// import deleteIp from "./deleteIp.js";
+import deleteIpFromDatabase from "../api/deleteIpFromDatabase.js";
 
-export default function saveReport(scannedIpList) {
+function isIpExpired(ip) {
+  return new Date(ip.expirationdate).valueOf() < new Date(new Date()).valueOf();
+}
+function isIpInDatabase(ip) {
+  if (ip.uid) return true;
+  else return false;
+}
+async function replaceIpInDatabase(ip, reportUID) {
+  await deleteIpFromDatabase(ip.uid);
+  const currentScannedIp = {
+    reportuid: reportUID,
+    dateofscan: new Date(),
+    expirationdate: expirationDate,
+    ...ip,
+    risk_score: riskScore,
+  };
+  saveIpToDatabase(currentScannedIp, reportUID);
+}
+
+export default async function saveReport(scannedIpList) {
   const reportUID = uuidv4();
   const expirationDate = new Date(
     new Date().setMonth(new Date().getMonth() + 3)
@@ -21,32 +42,30 @@ export default function saveReport(scannedIpList) {
   };
 
   scannedIpList.forEach((scannedIp) => {
-    let isIpInDatabase = false;
-    if (scannedIp.length && scannedIp[0].ip) isIpInDatabase = true;
-
-    let ipData;
+    console.log(scannedIp.ip, scannedIp.uid);
     let riskScore = 0;
-    if (isIpInDatabase) {
-      ipData = scannedIp[0];
-      riskScore = parseInt(scannedIp[0].risk_score);
+    currentReport.scannedIps.push(scannedIp.ip);
+    if (typeof scannedIp.risk_score == "object") {
+      riskScore = parseInt(scannedIp.risk_score.result);
     } else {
-      ipData = scannedIp.data.report;
-      riskScore = parseInt(scannedIp.data.report.risk_score.result);
+      riskScore = parseInt(scannedIp.risk_score);
     }
-
     highestRisk = Math.max(highestRisk, riskScore);
 
-    currentReport.scannedIps.push(ipData.ip);
+    if (isIpInDatabase(scannedIp)) {
+      if (isIpExpired(scannedIp)) {
+        replaceIpInDatabase(scannedIp, reportUID);
+      }
+    }
 
-    if (!isIpInDatabase) {
+    if (!isIpInDatabase(scannedIp)) {
       const currentScannedIp = {
         reportuid: reportUID,
         dateofscan: new Date(),
         expirationdate: expirationDate,
-        ...ipData,
+        ...scannedIp,
         risk_score: riskScore,
       };
-
       saveIpToDatabase(currentScannedIp, reportUID);
     }
   });
@@ -58,3 +77,5 @@ export default function saveReport(scannedIpList) {
 // saveReport(
 //   await scanIpList(["14.14.15.16", "8.8.8.10", "2.2.2.69", "9.8.7.6"])
 // );
+
+// console.log(isIpExpired({ expirationdate: "2024-01-29" }));

@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/single-ip-lookup.css";
 import axios from "axios";
 
 export default function SingleIPLookup() {
+  let isReportPopulated = false;
   const [lookupIP, setLookupIP] = useState();
-  const [ipData, setIpData] = useState();
+
+  const [ipData, setIpData] = useState([]);
+  const [anonymity, setAnonymity] = useState({
+    is_hosting: false,
+    is_proxy: false,
+    is_tor: false,
+    is_vpn: false,
+    is_webproxy: false,
+  });
+  const [blacklists, setBlacklists] = useState({
+    detection_rate: "No Data",
+    detections: "No Data",
+  });
+  const [engines, setEngines] = useState([]);
+  const [information, setInformation] = useState([]);
+  const [riskScore, setRiskScore] = useState("No Data");
 
   async function postIpAddresses(ipAddress) {
     return axios
@@ -13,8 +29,17 @@ export default function SingleIPLookup() {
       })
       .then((response) => {
         response.data;
-        console.log(response);
-        setIpData(response.data);
+        console.log(response.data.data[0]);
+        setIpData(response.data.data[0]);
+        if (typeof response.data.data[0].risk_score == "object") {
+          setRiskScore(response.data.data[0].risk_score.result);
+        } else {
+          setRiskScore(response.data.data[0].risk_score);
+        }
+        setAnonymity(response.data.data[0].anonymity);
+        setBlacklists(response.data.data[0].blacklists);
+        setEngines(response.data.data[0].blacklists.engines);
+        setInformation(response.data.data[0].information);
       })
       .catch((error) => console.error(error));
   }
@@ -29,13 +54,9 @@ export default function SingleIPLookup() {
       );
       entries.push(infoEntry);
     });
-    return (
-      <div className="information-panel panel">
-        <h1>Information</h1>
-        {entries}
-      </div>
-    );
+    return <div>{entries}</div>;
   }
+
   return (
     <div className="widget-wrapper">
       <div className="single-ip-lookup">
@@ -55,28 +76,30 @@ export default function SingleIPLookup() {
           <div className="half">
             <div className="block">
               <h3>Basic Information</h3>
-              <p>Risk Score:{"0" || ipData.data}</p>
+              <p>Risk Score: {riskScore}</p>
             </div>
             <div className="block">
               <h3>Blacklists</h3>
-              <p>Detection Rate:</p>
-              <p>Total Detections:</p>
+              <p>Detection Rate: {blacklists.detection_rate}</p>
+              <p>Total Detections: {blacklists.detections}</p>
             </div>
           </div>
           <div className="half">
             <div className="block">
               <h3>Anonymity</h3>
-              <p>Proxy:</p>
-              <p>Web Proxy:</p>
-              <p>Hosting:</p>
-              <p>VPN:</p>
-              <p>Tor Node:</p>
+              <p>Proxy: {anonymity.is_proxy.toString()}</p>
+              <p>Web Proxy: {anonymity.is_webproxy.toString()}</p>
+              <p>Hosting: {anonymity.is_hosting.toString()}</p>
+              <p>VPN: {anonymity.is_vpn.toString()}</p>
+              <p>Tor Node: {anonymity.is_tor.toString()}</p>
             </div>
             <div className="block">
               <h3>Information</h3>
+              <InformationPanel />
             </div>
           </div>
         </div>
+        <h5>View Report</h5>
       </div>
     </div>
   );

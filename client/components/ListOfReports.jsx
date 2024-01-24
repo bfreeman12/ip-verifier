@@ -92,7 +92,7 @@ const ListOfReports = ({ reports, deleteReport }) => {
           <button
             onClick={() => handleNameChange(report.uid, editableReportName)}
           >
-            ✓
+            ✎
           </button>
           <p className={threatLevel}>{report.highestlevelofthreat}</p>
           <p>{report.noofipsscanned}</p>
