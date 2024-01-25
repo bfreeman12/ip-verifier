@@ -14,40 +14,35 @@
 }
 
 .file-upload-container {
-  background-color: hsl(207, 18%, 22%);
+  background-color: #d8dfe4;
   display: flex;
-  border-radius: 5px;
   align-items: center;
-  height: 5vh;
 }
 .file-upload-container label {
   height: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  padding-inline: 1rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
   gap: 2rem;
-  color: white;
 }
 .file-upload-container label input[type=file] {
   display: none;
 }
 .file-upload-container label:hover {
-  color: hsl(207, 18%, 5%);
+  color: #f3fafa;
   background-color: #98c1d9;
 }
 .file-upload-container label:active {
   background-color: rgba(161, 161, 161, 0.723);
 }
 .file-upload-container button {
-  height: 100%;
-  border: none;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  display: flex;
+  flex: 1;
+  padding: 1rem;
+  margin-right: 3px;
 }
 
 button:hover {

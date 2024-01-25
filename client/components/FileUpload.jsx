@@ -98,7 +98,8 @@ const FileUpload = () => {
     <div className="file-upload-container">
       <label>
         <FontAwesomeIcon icon={faUpload} />
-        Please upload a file
+        <p>Please upload a file</p>
+
         <input
           type="file"
           name="file"
@@ -107,7 +108,9 @@ const FileUpload = () => {
           onChange={handleFileChange}
         />
       </label>
-      <button onClick={handleParse}>Parse</button>
+      <button onClick={handleParse}>
+        <p>Parse</p>
+      </button>
     </div>
   );
 };

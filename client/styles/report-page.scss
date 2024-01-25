@@ -1,8 +1,14 @@
-$darkest: hsl(207, 18%, 5%);
-$darker: hsl(207, 18%, 22%);
+// $darkest: hsl(207, 18%, 5%);
+// $darker: hsl(207, 18%, 22%);
+// $dark: #636f7e;
+// $light: #d8dfe4;
+// $lighter: #f3fafa;
+// $highlight: #98c1d9;
+$darkest: #f3fafa;
+$darker: #d8dfe4;
 $dark: #636f7e;
-$light: #d8dfe4;
-$lighter: #f3fafa;
+$light: hsl(207, 18%, 22%);
+$lighter: hsl(207, 18%, 5%);
 $highlight: #98c1d9;
 
 .report-body {
@@ -18,10 +24,6 @@ h4 {
 h1 {
   margin-bottom: 0px;
 }
-
-// tbody {
-//   padding-bottom: 2rem;
-// }
 button,
 option,
 select {
@@ -31,25 +33,20 @@ select {
   height: 100%;
 }
 .buttons {
-  // width: 10%;
-  // gap: 1rem;
   display: flex;
   justify-content: space-between;
   button {
     padding-inline: 1rem;
     box-sizing: border-box;
-    // height: 100%;
   }
 }
 .search-bar {
-  // height: unset;
   flex: auto;
   height: 2rem;
 }
 
 .pagination-controls {
   display: flex;
-  // flex: 1;
   height: 2rem;
   justify-content: space-between;
   align-items: center;
@@ -71,8 +68,6 @@ th {
 }
 tr {
   height: 3rem;
-  // text-align: center;
-  // padding-left: 1rem;
 }
 td {
   padding-left: 1rem;
@@ -80,22 +75,16 @@ td {
 tr:nth-of-type(even) {
   background: rgba(255, 255, 255, 0.02);
 }
-// input {
-//   height: 3rem;
-// }
-
 .ip-report {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   background: $darkest;
-  // box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid $darkest;
-  // max-height: 70vh;
   margin-bottom: 10vh;
   width: 100%;
   position: relative;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 
   a {
     text-decoration: none;
@@ -121,8 +110,6 @@ tr:nth-of-type(even) {
     p {
       display: flex;
       flex: 1;
-      // padding-inline: 1rem;
-      // border-right: 1px solid $dark;
     }
     p:last-of-type {
       border-right: none;
@@ -177,8 +164,21 @@ tr:nth-of-type(even) {
   color: hsl(0, 100%, 68%);
   font-weight: 900;
 }
-// 22223b
-// 4a4e69
-// 9a8c98
-// c9ada7
-// f2e9e4
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+}
+header {
+  :first-child {
+    display: flex;
+    align-items: center;
+  }
+}
+.report-name-block {
+  display: flex;
+  flex-direction: column;
+  align-items: start !important;
+}

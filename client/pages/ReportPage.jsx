@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import ReportData from "../components/ReportData";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+// import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/report-page.css";
 import Footer from "../components/Footer";
@@ -44,6 +47,20 @@ export default function ReportPage() {
   const [reportName, setReportName] = useState([]);
   const [rawReportData, setReportData] = useState([]);
 
+  const deleteReport = async (reportId) => {
+    if (window.confirm("Are you sure you would like to delete this report?")) {
+      try {
+        await axios.post("http://172.16.220.218:3200/deleteReport", {
+          uid: reportId,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  async function handleReportDelete(reportuid) {}
+
   useEffect(() => {
     fetchReport(uid).then(async (data) => {
       console.log(data);
@@ -67,8 +84,22 @@ export default function ReportPage() {
     <>
       <Navbar />
       <div className="report-body">
-        <h1>Report {reportName}</h1>
-        <h4>{rawReportData.uid}</h4>
+        <header>
+          <div>
+            <div className="report-name-block">
+              <h1>{reportName}</h1>
+              <h4>{rawReportData.uid}</h4>
+            </div>
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </div>
+          <FontAwesomeIcon
+            icon={faTrash}
+            onClick={() => {
+              deleteReport(rawReportData.uid);
+            }}
+          />
+        </header>
+
         <div className="ip-report">
           <ReportData ips={ips} />
         </div>

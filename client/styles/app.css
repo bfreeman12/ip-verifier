@@ -2,13 +2,13 @@ body {
   font-family: nunito;
   margin: 0px;
   font-weight: 400;
-  background-color: hsl(207, 18%, 5%);
-  color: #d8dfe4;
+  background-color: #f3fafa;
+  color: hsl(207, 18%, 22%);
 }
 @font-face {
   font-family: nunito;
   src: url(../media/Nunito-VariableFont_wght.ttf);
 }
 body a {
-  color: #f3fafa;
+  color: hsl(207, 18%, 5%);
 }/*# sourceMappingURL=app.css.map */

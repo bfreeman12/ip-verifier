@@ -1,8 +1,15 @@
-$darkest: hsl(207, 18%, 5%);
-$darker: hsl(207, 18%, 22%);
+// $darkest: hsl(207, 18%, 5%);
+// $darker: hsl(207, 18%, 22%);
+// $dark: #636f7e;
+// $light: #d8dfe4;
+// $lighter: #f3fafa;
+// $highlight: #98c1d9;
+
+$darkest: #f3fafa;
+$darker: #d8dfe4;
 $dark: #636f7e;
-$light: #d8dfe4;
-$lighter: #f3fafa;
+$light: hsl(207, 18%, 22%);
+$lighter: hsl(207, 18%, 5%);
 $highlight: #98c1d9;
 
 .upload {
@@ -14,6 +21,7 @@ $highlight: #98c1d9;
   flex-direction: column;
   p {
     margin: 0px;
+    // font-size: 1rem;
   }
   .upload-subtitle {
     text-align: center;
@@ -23,20 +31,20 @@ $highlight: #98c1d9;
 .file-upload-container {
   background-color: $darker;
   display: flex;
-  border-radius: 5px;
+  // border-radius: 5px;
   align-items: center;
-  height: 5vh;
+  // height: 5vh;
 
   label {
     height: 100%;
     user-select: none;
-    padding-inline: 1rem;
+    padding: 1rem;
     display: flex;
     align-items: center;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    // border-top-left-radius: 5px;
+    // border-bottom-left-radius: 5px;
     gap: 2rem;
-    color: white;
+    // color: white;
     input[type="file"] {
       display: none;
     }
@@ -50,10 +58,15 @@ $highlight: #98c1d9;
     background-color: rgba(161, 161, 161, 0.723);
   }
   button {
-    height: 100%;
-    border: none;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    // height: 100%;
+    display: flex;
+    flex: 1;
+    // border: none;
+    // border-radius: 0px;
+    padding: 1rem;
+    margin-right: 3px;
+    // border-top-right-radius: 5px;
+    // border-bottom-right-radius: 5px;
   }
 }
 button:hover {

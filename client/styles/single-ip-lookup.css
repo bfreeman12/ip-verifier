@@ -41,10 +41,9 @@
 input {
   display: flex;
   flex: 1;
-  background: hsl(207, 18%, 5%);
-  border: 1px solid hsl(207, 18%, 22%);
+  background: #f3fafa;
+  border: 1px solid #d8dfe4;
   height: 2rem;
-  color: white;
   border-radius: 4px;
   padding-inline: 1rem;
   box-sizing: border-box;

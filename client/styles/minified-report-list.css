@@ -18,7 +18,7 @@ a {
 }
 
 .header {
-  background: hsl(207, 18%, 5%) !important;
+  background: #f3fafa !important;
   position: sticky;
 }
 
@@ -30,7 +30,7 @@ a {
   padding-inline: 4rem;
   box-sizing: border-box;
   transition-duration: 0.2s;
-  border-bottom: 1px solid hsl(207, 18%, 22%);
+  border-bottom: 1px solid #d8dfe4;
 }
 .report .report-name {
   word-wrap: break-word;
@@ -78,7 +78,7 @@ a {
 }
 
 .low-threat {
-  color: #f3fafa;
+  color: hsl(207, 18%, 5%);
 }
 
 .mid-threat {

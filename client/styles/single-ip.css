@@ -23,11 +23,11 @@
 }
 
 .panel {
-  background-color: hsl(207, 18%, 5%);
+  background-color: #f3fafa;
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 5px;
-  border: 1px solid hsl(207, 18%, 22%);
+  border: 1px solid #d8dfe4;
 }
 .panel h1 {
   margin: 0px;
@@ -62,14 +62,14 @@
   gap: 1rem;
 }
 .blacklists-panel .blacklist-entry {
-  background-color: hsl(207, 18%, 22%);
+  background-color: #d8dfe4;
   padding: 1rem;
-  border: 1px solid hsl(207, 18%, 22%);
+  border: 1px solid #d8dfe4;
   border-radius: 5px;
 }
 
 .information-panel {
-  background-color: hsl(207, 18%, 5%);
+  background-color: #f3fafa;
   display: flex;
   flex: 1;
   flex-direction: column;

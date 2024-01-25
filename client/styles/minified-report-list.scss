@@ -1,14 +1,22 @@
-$darkest: hsl(207, 18%, 5%);
-$darker: hsl(207, 18%, 22%);
+// $darkest: hsl(207, 18%, 5%);
+// $darker: hsl(207, 18%, 22%);
+// $dark: #636f7e;
+// $light: #d8dfe4;
+// $lighter: #f3fafa;
+// $highlight: #98c1d9;
+
+$darkest: #f3fafa;
+$darker: #d8dfe4;
 $dark: #636f7e;
-$light: #d8dfe4;
-$lighter: #f3fafa;
+$light: hsl(207, 18%, 22%);
+$lighter: hsl(207, 18%, 5%);
 $highlight: #98c1d9;
 
 .report-body {
   display: flex;
   margin-top: 9vh;
   //   flex-direction: column;
+  //   background: $darkest;
   padding-inline: 20vh;
 }
 h4 {
