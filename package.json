@@ -1,1 +1,5 @@
-{}
+{
+  "dependencies": {
+    "gitmoji-cli": "^9.0.0"
+  }
+}
