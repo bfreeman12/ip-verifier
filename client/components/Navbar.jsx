@@ -2,6 +2,9 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import AirForce from "../media/AirForceLogo.png";
 import "../styles/navbar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faFile, faList } from "@fortawesome/free-solid-svg-icons";
+
 export default function Navbar() {
   return (
     <>
@@ -12,12 +15,15 @@ export default function Navbar() {
         <h2>IP Verification Tool</h2>
         <div className="links">
           <Link className="link" to="/">
+            <FontAwesomeIcon icon={faHome} />
             Home
           </Link>
           <Link className="link" to="/reports">
+            <FontAwesomeIcon icon={faFile} />
             Reports
           </Link>
           <Link className="link" to="/all-ips">
+            <FontAwesomeIcon icon={faList} />
             IPs
           </Link>
         </div>

@@ -23,7 +23,7 @@
 }
 
 .panel {
-  background-color: #f3fafa;
+  background-color: #fcffff;
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 5px;
@@ -69,7 +69,7 @@
 }
 
 .information-panel {
-  background-color: #f3fafa;
+  background-color: #fcffff;
   display: flex;
   flex: 1;
   flex-direction: column;

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/single-ip-lookup.css";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function SingleIPLookup() {
   let isReportPopulated = false;
-  const [lookupIP, setLookupIP] = useState();
-
+  const [lookupIP, setLookupIP] = useState("8.8.8.8");
   const [ipData, setIpData] = useState([]);
   const [anonymity, setAnonymity] = useState({
     is_hosting: false,
@@ -22,26 +23,77 @@ export default function SingleIPLookup() {
   const [information, setInformation] = useState([]);
   const [riskScore, setRiskScore] = useState("No Data");
 
+  function validateIP(ipAddress) {
+    const ipRegex = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/;
+
+    const regexLocalhost = /^(127\.)/;
+    const regexPrivateNetwork10 = /^(10\.)/;
+    const regexPrivateNetwork172 = /^(172\.(1[6-9]|2[0-9]|3[0-1])\.)/;
+    const regexPrivateNetwork192 = /^(192\.168\.)/;
+    const regexPrivateNetwork131 = /^(131\.14\.)/;
+    const regexAPIPA = /^(169\.254\.)/;
+    const regexMulticast = /^(22[4-9]|23[0-9])\./;
+    const regexFutureUse = /^(24[0-9]|25[0-5])\./;
+    const regexBroadcast = /^(255\.255\.255\.255)/;
+
+    const ipRegexes = [
+      regexLocalhost,
+      regexPrivateNetwork10,
+      regexPrivateNetwork172,
+      regexPrivateNetwork192,
+      regexPrivateNetwork131,
+      regexAPIPA,
+      regexMulticast,
+      regexFutureUse,
+      regexBroadcast,
+    ];
+
+    let isPublic = true;
+    let isIPV4 = true;
+
+    console.log(ipAddress.split(""));
+
+    // if (ipAddress.split("")[0] == "f") isIPV4 = false;
+    if (!ipRegex.test(ipAddress)) isIPV4 = false;
+
+    if (ipRegexes.some((regex) => regex.test(ipAddress))) {
+      isPublic = false;
+    }
+
+    if (isPublic && isIPV4) return true;
+    else {
+      console.log("invalid ip");
+      return false;
+    }
+  }
+
   async function postIpAddresses(ipAddress) {
-    return axios
-      .post("http://172.16.220.218:3200/handleFileUpload", {
-        ips: ipAddress,
-      })
-      .then((response) => {
-        response.data;
-        console.log(response.data.data[0]);
-        setIpData(response.data.data[0]);
-        if (typeof response.data.data[0].risk_score == "object") {
-          setRiskScore(response.data.data[0].risk_score.result);
-        } else {
-          setRiskScore(response.data.data[0].risk_score);
-        }
-        setAnonymity(response.data.data[0].anonymity);
-        setBlacklists(response.data.data[0].blacklists);
-        setEngines(response.data.data[0].blacklists.engines);
-        setInformation(response.data.data[0].information);
-      })
-      .catch((error) => console.error(error));
+    if (validateIP(ipAddress[0])) {
+      return axios
+        .post("http://172.16.220.218:3200/handleFileUpload", {
+          ips: ipAddress,
+        })
+        .then((response) => {
+          response.data;
+          console.log(response.data.data[0]);
+          setIpData(response.data.data[0]);
+          if (typeof response.data.data[0].risk_score == "object") {
+            setRiskScore(response.data.data[0].risk_score.result);
+          } else {
+            setRiskScore(response.data.data[0].risk_score);
+          }
+          setAnonymity(response.data.data[0].anonymity);
+          setBlacklists(response.data.data[0].blacklists);
+          setEngines(response.data.data[0].blacklists.engines);
+          setInformation(response.data.data[0].information);
+          isReportPopulated;
+        })
+        .catch((error) => console.error(error));
+    } else {
+      alert(
+        "Invalid IP. Please try entering a more valid IPV4 IP next time. I'm not very good at input validation, so if you mess around enough, you might crash my server. Please don't do that! (•̀з•́)"
+      );
+    }
   }
 
   function InformationPanel() {
@@ -70,7 +122,9 @@ export default function SingleIPLookup() {
               setLookupIP(e.target.value);
             }}
           ></input>
-          <button onClick={() => postIpAddresses([lookupIP])}>Query IP</button>
+          <button onClick={() => postIpAddresses([lookupIP])}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
         </div>
         <div className="whole">
           <div className="half">

@@ -1,3 +1,8 @@
+.fa-icon :hover {
+  color: #98c1d9;
+  cursor: pointer;
+}
+
 .report-body {
   display: flex;
   margin-top: 9vh;
@@ -77,8 +82,8 @@ tr:nth-of-type(even) {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  background: #f3fafa;
-  border: 1px solid #f3fafa;
+  background: #fcffff;
+  border: 1px solid #fcffff;
   margin-bottom: 10vh;
   width: 100%;
   position: relative;
@@ -88,7 +93,7 @@ tr:nth-of-type(even) {
   text-decoration: none;
 }
 .ip-report .header {
-  background: #f3fafa !important;
+  background: #fcffff !important;
   position: sticky;
 }
 .ip-report .report {
@@ -172,6 +177,19 @@ header {
 header :first-child {
   display: flex;
   align-items: center;
+}
+
+.reports-header {
+  justify-content: start;
+  margin: 0px;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+.reports-header h1 {
+  margin: 0px;
+}
+.reports-header .fa-icon {
+  font-size: 1.5rem;
 }
 
 .report-name-block {

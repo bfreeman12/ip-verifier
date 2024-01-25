@@ -4,12 +4,19 @@
 // $light: #d8dfe4;
 // $lighter: #f3fafa;
 // $highlight: #98c1d9;
-$darkest: #f3fafa;
+$darkest: #fcffff;
 $darker: #d8dfe4;
 $dark: #636f7e;
 $light: hsl(207, 18%, 22%);
 $lighter: hsl(207, 18%, 5%);
 $highlight: #98c1d9;
+
+.fa-icon {
+  :hover {
+    color: $highlight;
+    cursor: pointer;
+  }
+}
 
 .report-body {
   display: flex;
@@ -175,6 +182,18 @@ header {
   :first-child {
     display: flex;
     align-items: center;
+  }
+}
+.reports-header {
+  justify-content: start;
+  margin: 0px;
+  gap: 1rem;
+  padding-block: 1rem;
+  h1 {
+    margin: 0px;
+  }
+  .fa-icon {
+    font-size: 1.5rem;
   }
 }
 .report-name-block {

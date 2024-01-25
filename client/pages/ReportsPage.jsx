@@ -5,6 +5,8 @@ import ListOfReports from "../components/ListOfReports";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/report-page.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile } from "@fortawesome/free-solid-svg-icons";
 
 export default function ReportPage() {
   const [reports, setReports] = useState([]);
@@ -40,7 +42,10 @@ export default function ReportPage() {
     <>
       <Navbar />
       <div className="report-body">
-        <h1>Reports</h1>
+        <header className="reports-header">
+          <FontAwesomeIcon icon={faFile} className="fa-icon" />
+          <h1>Reports</h1>
+        </header>
         <div className="ip-report">
           <ListOfReports reports={reports} deleteReport={deleteReport} />
         </div>

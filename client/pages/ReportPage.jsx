@@ -10,6 +10,7 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/report-page.css";
 import Footer from "../components/Footer";
+// import updateReport from "../../server/routes/updateReport";
 
 function formatListOfIPs(text) {
   if (text == undefined) {
@@ -59,7 +60,26 @@ export default function ReportPage() {
     }
   };
 
-  async function handleReportDelete(reportuid) {}
+  async function handleReportDelete(reportuid) {
+    await deleteReport(reportuid);
+    window.location.href = "/reports/";
+  }
+
+  async function handleNameChange(reportuid) {
+    let newReportName = prompt("Input new report name");
+    if (newReportName == undefined) return;
+    try {
+      await axios.patch("http://172.16.220.218:3200/updateReport", {
+        params: {
+          uid: reportuid,
+          reportName: newReportName,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    setReportName(newReportName);
+  }
 
   useEffect(() => {
     fetchReport(uid).then(async (data) => {
@@ -90,13 +110,20 @@ export default function ReportPage() {
               <h1>{reportName}</h1>
               <h4>{rawReportData.uid}</h4>
             </div>
-            <FontAwesomeIcon icon={faPenToSquare} />
+            <FontAwesomeIcon
+              icon={faPenToSquare}
+              onClick={() => {
+                handleNameChange(rawReportData.uid);
+              }}
+              className="fa-icon"
+            />
           </div>
           <FontAwesomeIcon
             icon={faTrash}
             onClick={() => {
-              deleteReport(rawReportData.uid);
+              handleReportDelete(rawReportData.uid);
             }}
+            className="fa-icon"
           />
         </header>
 

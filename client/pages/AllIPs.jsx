@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import ReportData from "../components/ReportData";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faList } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/report-page.css";
 import Footer from "../components/Footer";
@@ -29,7 +31,10 @@ export default function AllIps() {
     <>
       <Navbar />
       <div className="report-body">
-        <h1>All Scanned IPs</h1>
+        <header className="reports-header">
+          <FontAwesomeIcon icon={faList} className="fa-icon" />
+          <h1>All Scanned IPs</h1>
+        </header>
         <div className="ip-report">
           <ReportData ips={ips} />
         </div>
