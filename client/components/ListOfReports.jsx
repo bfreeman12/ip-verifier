@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import formatDate from "../functions/formatDate";
-import { useTable, usePagination } from "react-table";
+import { useTable, usePagination, useSortBy } from "react-table";
 import { Link } from "react-router-dom";
 
 //ChatGPT got this working. Please don't break it. <3
@@ -81,7 +81,7 @@ function ListOfReports(reports) {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize },
-  } = useTable({ columns, data: filteredData }, usePagination);
+  } = useTable({ columns, data: filteredData }, useSortBy, usePagination);
 
   // Render the UI for your table
   return (
@@ -97,8 +97,18 @@ function ListOfReports(reports) {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()} className="table-header">
+                <th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  className="table-header"
+                >
                   {column.render("Header")}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </span>
                 </th>
               ))}
             </tr>
