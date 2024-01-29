@@ -9,7 +9,7 @@ import "../styles/single-ip.css";
 
 async function fetchIp(ip) {
   return axios
-    .get("http://172.16.220.218:3200/getIp", {
+    .get("http://localhost:3200/getIp", {
       params: {
         ip: ip,
       },
@@ -50,6 +50,30 @@ export default function SingleIP() {
         <p>report UID: {ipData.reportuid}</p>
         <p>date scanned: {formatDate(ipData.dateofscan)}</p>
         <p>expiration date: {formatDate(ipData.expirationdate)}</p>
+      </div>
+    );
+  }
+  function ResourcesPanel() {
+    return (
+      <div className="resources-panel panel">
+        <h1>Resources</h1>
+        <ul>
+          <a href={`https://otx.alienvault.com/indicator/ip/${ipData.ip}`}>
+            <li>Alienvault</li>
+          </a>
+          <a href={`https://search.dnslytics.com/ip/${ipData.ip}`}>
+            <li>DNSlytics</li>
+          </a>
+          <a href="https://www.url2png.com/">
+            <li>URL2PNG</li>
+          </a>
+          <a href="https://www.urlscan.io/">
+            <li>URLScan.io</li>
+          </a>
+          <a href={`https://www.virustotal.com/gui/ip-address/${ipData.ip}`}>
+            <li>VirusTotal</li>
+          </a>
+        </ul>
       </div>
     );
   }
@@ -120,10 +144,11 @@ export default function SingleIP() {
         <div className="content-container">
           <div className="first-row">
             <TitlePanel />
-            <AnonymityPanel />
+            <ResourcesPanel />
           </div>
           <div className="second-row">
             <BlacklistPanel />
+            <AnonymityPanel />
             <InformationPanel />
           </div>
         </div>

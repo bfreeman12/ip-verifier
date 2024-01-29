@@ -34,6 +34,17 @@ a {
 .header {
   background: $darkest !important;
   position: sticky;
+  display: flex;
+  flex-direction: row;
+  padding-inline: 4rem;
+  align-items: center;
+
+  p {
+    display: flex;
+    flex: 1;
+    height: 3rem;
+    align-items: center;
+  }
 }
 
 .report {
@@ -45,9 +56,10 @@ a {
   box-sizing: border-box;
   transition-duration: 0.2s;
   border-bottom: 1px solid $darker;
+  height: 3rem;
   .report-name {
     word-wrap: break-word;
-    padding-right: 1rem;
+    // padding-right: 1rem;
   }
   p {
     display: flex;

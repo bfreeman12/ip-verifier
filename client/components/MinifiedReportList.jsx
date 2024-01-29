@@ -10,7 +10,7 @@ function MinifiedReportList(data) {
 
   function TableHeader() {
     return (
-      <div className="report header">
+      <div className="header">
         {/* <p></p> */}
         <p>Date of Scan</p>
         <p className="report-name">Report Name</p>

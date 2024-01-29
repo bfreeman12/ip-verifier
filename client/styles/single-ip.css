@@ -1,3 +1,7 @@
+p {
+  margin: 0px;
+}
+
 .page-container {
   position: relative;
   margin-top: 9vh;
@@ -49,6 +53,8 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: -moz-min-content;
+  height: min-content;
 }
 
 .blacklists-panel {
@@ -62,9 +68,8 @@
   gap: 1rem;
 }
 .blacklists-panel .blacklist-entry {
-  background-color: #d8dfe4;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  border: 1px solid #d8dfe4;
   border-radius: 5px;
 }
 
@@ -75,4 +80,15 @@
   flex-direction: column;
   height: -moz-min-content;
   height: min-content;
+}
+
+.resources-panel {
+  display: flex;
+  flex: 0;
+  flex-direction: column;
+  align-items: start;
+}
+.resources-panel a:hover {
+  cursor: pointer;
+  color: #636f7e;
 }/*# sourceMappingURL=single-ip.css.map */

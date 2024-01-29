@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function SingleIPLookup() {
-  let isReportPopulated = false;
+  //   let isReportPopulated = false;
+  const [isReportPopulated, setIsReportPopulated] = useState(false);
   const [lookupIP, setLookupIP] = useState("8.8.8.8");
   const [ipData, setIpData] = useState([]);
   const [anonymity, setAnonymity] = useState({
@@ -86,7 +87,7 @@ export default function SingleIPLookup() {
           setBlacklists(response.data.data[0].blacklists);
           setEngines(response.data.data[0].blacklists.engines);
           setInformation(response.data.data[0].information);
-          isReportPopulated;
+          setIsReportPopulated(true);
         })
         .catch((error) => console.error(error));
     } else {
@@ -107,6 +108,28 @@ export default function SingleIPLookup() {
       entries.push(infoEntry);
     });
     return <div>{entries}</div>;
+  }
+
+  function ResourcesPanel() {
+    if (isReportPopulated) {
+      return (
+        <div className="list">
+          <a href={`https://otx.alienvault.com/indicator/ip/${ipData.ip}`}>
+            Link to Alienvault
+          </a>
+          <a href={`https://search.dnslytics.com/ip/${ipData.ip}`}>
+            Link to DNSlytics
+          </a>
+          <a href="https://www.url2png.com/">Link to URL2PNG</a>
+          <a href="https://www.urlscan.io/">Link to URLScan.io</a>
+          <a href={`https://www.virustotal.com/gui/ip-address/${ipData.ip}`}>
+            Link to VirusTotal
+          </a>
+        </div>
+      );
+    } else {
+      return <p>No data given</p>;
+    }
   }
 
   return (
@@ -131,6 +154,10 @@ export default function SingleIPLookup() {
             <div className="block">
               <h3>Basic Information</h3>
               <p>Risk Score: {riskScore}</p>
+            </div>
+            <div className="block">
+              <h3>Resources</h3>
+              <ResourcesPanel />
             </div>
             <div className="block">
               <h3>Blacklists</h3>

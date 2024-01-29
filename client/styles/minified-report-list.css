@@ -20,6 +20,16 @@ a {
 .header {
   background: #f3fafa !important;
   position: sticky;
+  display: flex;
+  flex-direction: row;
+  padding-inline: 4rem;
+  align-items: center;
+}
+.header p {
+  display: flex;
+  flex: 1;
+  height: 3rem;
+  align-items: center;
 }
 
 .report {
@@ -31,10 +41,10 @@ a {
   box-sizing: border-box;
   transition-duration: 0.2s;
   border-bottom: 1px solid #d8dfe4;
+  height: 3rem;
 }
 .report .report-name {
   word-wrap: break-word;
-  padding-right: 1rem;
 }
 .report p {
   display: flex;
