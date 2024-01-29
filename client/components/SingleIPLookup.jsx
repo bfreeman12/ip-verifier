@@ -3,6 +3,8 @@ import "../styles/single-ip-lookup.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+const PORT = import.meta.env.VITE_PORT;
 
 export default function SingleIPLookup() {
   //   let isReportPopulated = false;
@@ -71,7 +73,7 @@ export default function SingleIPLookup() {
   async function postIpAddresses(ipAddress) {
     if (validateIP(ipAddress[0])) {
       return axios
-        .post("http://172.16.220.218:3200/handleFileUpload", {
+        .post(`http://${SERVER_HOST}:${PORT}/handleFileUpload`, {
           ips: ipAddress,
         })
         .then((response) => {

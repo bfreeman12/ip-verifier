@@ -6,17 +6,19 @@ import "../styles/home.css";
 import MinifiedReportList from "../components/MinifiedReportList";
 import UploadWidget from "../components/UploadWidget";
 import SingleIPLookup from "../components/SingleIPLookup";
+const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+const PORT = import.meta.env.VITE_PORT;
 
 async function fetchRemainingCredits() {
   return axios
-    .get("http://172.16.220.218:3200/getRemainingCredits")
+    .get(`http://${SERVER_HOST}:${PORT}/getRemainingCredits`)
     .then((response) => response.data)
     .catch((error) => console.error(error));
 }
 
 async function fetchReports() {
   return axios
-    .get("http://172.16.220.218:3200/getReports")
+    .get(`http://${SERVER_HOST}:${PORT}/getReports`)
     .then((response) => response.data)
     .catch((error) => console.error(error));
 }

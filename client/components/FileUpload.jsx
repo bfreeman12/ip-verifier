@@ -4,6 +4,8 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import "../styles/upload.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+const PORT = import.meta.env.VITE_PORT;
 
 const FileUpload = () => {
   const [data, setData] = useState([]);
@@ -79,7 +81,7 @@ const FileUpload = () => {
 
   async function postIpAddresses(ipAddresses) {
     return axios
-      .post("http://172.16.220.218:3200/handleFileUpload", {
+      .post(`http://${SERVER_HOST}:${PORT}/handleFileUpload`, {
         ips: ipAddresses,
       })
       .then((response) => response.data)

@@ -10,9 +10,12 @@ import { faList } from "@fortawesome/free-solid-svg-icons";
 import "../styles/report-page.css";
 import Footer from "../components/Footer";
 
+const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+const PORT = import.meta.env.VITE_PORT;
+
 function fetchIps() {
   return axios
-    .get("http://172.16.220.218:3200/getIps")
+    .get(`http://${SERVER_HOST}:${PORT}/getIps`)
     .then((response) => response.data)
     .catch((error) => console.error(error));
 }

@@ -7,9 +7,12 @@ import { useParams } from "react-router-dom";
 import formatDate from "../functions/formatDate";
 import "../styles/single-ip.css";
 
+const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+const PORT = import.meta.env.VITE_PORT;
+
 async function fetchIp(ip) {
   return axios
-    .get("http://localhost:3200/getIp", {
+    .get(`http://${SERVER_HOST}:${PORT}/getIp`, {
       params: {
         ip: ip,
       },
