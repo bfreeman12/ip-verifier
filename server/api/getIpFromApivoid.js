@@ -16,9 +16,7 @@ export default function getIpFromApivoid(ip, apikey) {
           "&ip=" +
           ip
       )
-      // .then((response) => response.json())
       .then((data) => {
-        // console.log(data.data);
         return data.data;
       })
   );

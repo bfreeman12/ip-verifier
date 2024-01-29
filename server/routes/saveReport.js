@@ -2,7 +2,6 @@ import saveReportToDatabase from "../api/saveReportToDatabase.js";
 import saveIpToDatabase from "../api/saveIpToDatabase.js";
 import { v4 as uuidv4 } from "uuid";
 import formatDate from "../../client/functions/formatDate.js";
-// import deleteIp from "./deleteIp.js";
 import deleteIpFromDatabase from "../api/deleteIpFromDatabase.js";
 
 function isIpExpired(ip) {
@@ -69,11 +68,5 @@ export default async function saveReport(scannedIpList) {
   });
 
   currentReport.highestLevelOfThreat = highestRisk;
-  saveReportToDatabase(currentReport);
+  if (scannedIpList.length > 1) saveReportToDatabase(currentReport);
 }
-
-// saveReport(
-//   await scanIpList(["14.14.15.16", "8.8.8.10", "2.2.2.69", "9.8.7.6"])
-// );
-
-// console.log(isIpExpired({ expirationdate: "2024-01-29" }));

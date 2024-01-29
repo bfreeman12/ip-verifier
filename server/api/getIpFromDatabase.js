@@ -12,7 +12,6 @@ const getIpFromDatabase = async (ip) => {
 
     const { rows } = await client.query(query, [ip]);
 
-    // console.log(rows);
     client.release();
     return rows;
   } catch (error) {
@@ -20,7 +19,5 @@ const getIpFromDatabase = async (ip) => {
     client.release();
   }
 };
-
-// console.log(await getIp("8.8.8.8"));
 
 export default getIpFromDatabase;
