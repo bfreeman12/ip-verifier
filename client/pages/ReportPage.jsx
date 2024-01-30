@@ -36,7 +36,7 @@ async function fetchReport(uid) {
 }
 async function fetchIp(ip) {
   return axios
-    .get("http://${SERVER_HOST}:${PORT}/getIp", {
+    .get(`http://${SERVER_HOST}:${PORT}/getIp`, {
       params: {
         ip: ip,
       },
