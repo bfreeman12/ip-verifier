@@ -39,6 +39,8 @@ const FileUpload = () => {
   };
 
   function validateIPs(ipList) {
+    const ipRegex = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/;
+
     const regexLocalhost = /^(127\.)/;
     const regexPrivateNetwork10 = /^(10\.)/;
     const regexPrivateNetwork172 = /^(172\.(1[6-9]|2[0-9]|3[0-1])\.)/;
@@ -67,7 +69,7 @@ const FileUpload = () => {
       let isPublic = true;
       let isIPV4 = true;
 
-      if (ip.split("")[0] == "f") isIPV4 = false;
+      if (!ipRegex.test(ip)) isIPV4 = false;
 
       if (ipRegexes.some((regex) => regex.test(ip))) {
         isPublic = false;
@@ -92,7 +94,8 @@ const FileUpload = () => {
     if (data.length != 0) {
       postIpAddresses(validateIPs(data));
     } else {
-      console.error("no data");
+      // console.error("no data");
+      return;
     }
   }, [data]);
 
