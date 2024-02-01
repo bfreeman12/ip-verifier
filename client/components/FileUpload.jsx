@@ -104,7 +104,6 @@ const FileUpload = () => {
       <label>
         <FontAwesomeIcon icon={faUpload} />
         <p>Please upload a file</p>
-
         <input
           type="file"
           name="file"

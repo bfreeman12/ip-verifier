@@ -6,6 +6,7 @@ export default function UploadWidget({ remainingCredits, remainingQueries }) {
     <div className="upload">
       <div className="body-header">
         <p>Please upload a file to get started</p>
+        <p>Only files with greater than 1 IP will become reports</p>
       </div>
       <div>
         <FileUpload />

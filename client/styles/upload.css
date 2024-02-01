@@ -12,6 +12,9 @@
 .upload .upload-subtitle {
   text-align: center;
 }
+.upload .body-header {
+  text-align: center;
+}
 
 .file-upload-container {
   background-color: #d8dfe4;
