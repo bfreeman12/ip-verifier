@@ -54,7 +54,7 @@ export default function ReportPage() {
   const deleteReport = async (reportId) => {
     if (window.confirm("Are you sure you would like to delete this report?")) {
       try {
-        await axios.post("http://${SERVER_HOST}:${PORT}/deleteReport", {
+        await axios.post(`http://${SERVER_HOST}:${PORT}/deleteReport`, {
           uid: reportId,
         });
       } catch (error) {
@@ -71,8 +71,9 @@ export default function ReportPage() {
   async function handleNameChange(reportuid) {
     let newReportName = prompt("Input new report name");
     if (newReportName == undefined) return;
+    setReportName(newReportName);
     try {
-      await axios.patch("http://${SERVER_HOST}:${PORT}/updateReport", {
+      await axios.patch(`http://${SERVER_HOST}:${PORT}/updateReport`, {
         params: {
           uid: reportuid,
           reportName: newReportName,
@@ -81,7 +82,6 @@ export default function ReportPage() {
     } catch (error) {
       console.error(error);
     }
-    setReportName(newReportName);
   }
 
   useEffect(() => {

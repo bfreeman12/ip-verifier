@@ -6,7 +6,8 @@ const limiter = new Bottleneck({
   minTime: 333,
 });
 
-export default function getIpFromApivoid(ip, apikey) {
+export default function getIpFromApivoid(ip) {
+  const apikey = process.env.API_KEY;
   console.log("working on ", ip);
   return limiter.schedule(() =>
     axios
