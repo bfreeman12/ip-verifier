@@ -12,7 +12,6 @@ function ListOfReports(reports) {
     () =>
       Object.keys(reports.reports).map((key) => ({
         ...reports.reports[key],
-        // threatLevel: getThreatLevel(reports.reports[key].risk_score),
         date: formatDate(reports.reports[key].dateofreport),
         expiration: formatDate(reports.reports[key].expirationdate),
       })),
@@ -48,7 +47,7 @@ function ListOfReports(reports) {
         ),
       },
       {
-        Header: "No. of IPs Scanned",
+        Header: "No. of Unique IPs Scanned",
         accessor: "noofipsscanned",
       },
       {

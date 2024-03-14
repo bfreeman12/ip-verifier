@@ -157,19 +157,19 @@ tr:nth-of-type(even) {
   }
 }
 .low-threat {
-  color: $lighter;
+  color: hsl(110, 100%, 48%);
   font-weight: 600;
 }
 .mid-threat {
-  color: hsl(60, 100%, 68%);
+  color: hsl(60, 40%, 58%);
   font-weight: 900;
 }
 .high-threat {
-  color: hsl(39, 100%, 68%);
+  color: hsl(39, 70%, 48%);
   font-weight: 900;
 }
 .crit-threat {
-  color: hsl(0, 100%, 68%);
+  color: hsl(0, 100%, 48%);
   font-weight: 900;
 }
 

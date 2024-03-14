@@ -8,6 +8,17 @@ import { Link } from "react-router-dom";
 function ReportData(ips) {
   const [filterInput, setFilterInput] = useState("");
 
+  function logisticScale(x) {
+    const L = 100; // Maximum value
+    const k = 0.7; // Steepness of the curve, adjust this as needed
+    const x0 = 2; // Midpoint of the curve
+
+    let unroundedValue = L / (1 + Math.exp(-k * (x - x0)));
+
+    if (x === 0) return 0;
+    return Math.round(unroundedValue * 100) / 100;
+  }
+
   const data = React.useMemo(
     () =>
       Object.keys(ips.ips).map((key) => ({
@@ -48,9 +59,9 @@ function ReportData(ips) {
       },
       {
         Header: "Risk Score",
-        accessor: "risk_score",
+        accessor: "blacklists.detections",
         Cell: ({ value }) => (
-          <div className={getThreatLevel(value)}>{value}</div>
+          <div className={getThreatLevel(value)}>{logisticScale(value)}</div>
         ),
       },
       {
@@ -175,12 +186,12 @@ function ReportData(ips) {
   );
 }
 
-function getThreatLevel(riskScore) {
-  if (riskScore > 66) {
+function getThreatLevel(detections) {
+  if (detections > 3) {
     return "crit-threat";
-  } else if (riskScore > 33) {
+  } else if (detections == 3) {
     return "high-threat";
-  } else if (riskScore > 1) {
+  } else if (detections == 2) {
     return "mid-threat";
   } else {
     return "low-threat";
