@@ -37,6 +37,7 @@
 .file-upload-container label:hover {
   color: #f3fafa;
   background-color: #98c1d9;
+  cursor: pointer;
 }
 .file-upload-container label:active {
   background-color: rgba(161, 161, 161, 0.723);
@@ -51,6 +52,7 @@
 button:hover {
   background-color: #98c1d9;
   color: #f3fafa;
+  cursor: pointer;
 }
 
 button:active {

@@ -50,6 +50,7 @@ $highlight: #98c1d9;
   label:hover {
     color: $darkest;
     background-color: $highlight;
+    cursor: pointer;
   }
   label:active {
     background-color: rgba(161, 161, 161, 0.723);
@@ -64,6 +65,7 @@ $highlight: #98c1d9;
 button:hover {
   background-color: $highlight;
   color: $darkest;
+  cursor: pointer;
 }
 button:active {
   background-color: rgba(112, 112, 112, 0.767);

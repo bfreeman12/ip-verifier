@@ -40,13 +40,6 @@ function ListOfReports(reports) {
         accessor: "reportname",
       },
       {
-        Header: "Highest Level of Threat",
-        accessor: "highestlevelofthreat",
-        Cell: ({ value }) => (
-          <div className={getThreatLevel(value)}>{value}</div>
-        ),
-      },
-      {
         Header: "No. of Unique IPs Scanned",
         accessor: "noofipsscanned",
       },

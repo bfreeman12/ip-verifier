@@ -1,6 +1,4 @@
 import React from "react";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import formatDate from "../functions/formatDate";
 import "../styles/minified-report-list.css";
@@ -14,7 +12,6 @@ function MinifiedReportList(data) {
         {/* <p></p> */}
         <p>Date of Scan</p>
         <p className="report-name">Report Name</p>
-        <p>Highest Level of Threat</p>
       </div>
     );
   }
@@ -49,7 +46,6 @@ function MinifiedReportList(data) {
           <div className="report" key={index}>
             <p>{formatDate(report.dateofreport)}</p>
             <p className="report-name">{report.reportname}</p>
-            <p className={threatLevel}>{report.highestlevelofthreat}</p>
           </div>
         </Link>
       );
