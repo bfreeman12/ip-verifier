@@ -11,14 +11,14 @@ function isIpInDatabase(ip) {
   if (ip.uid) return true;
   else return false;
 }
-async function replaceIpInDatabase(ip, reportUID) {
+async function replaceIpInDatabase(ip, reportUID, expirationDate) {
   await deleteIpFromDatabase(ip.uid);
   const currentScannedIp = {
     reportuid: reportUID,
     dateofscan: new Date(),
     expirationdate: expirationDate,
     ...ip,
-    risk_score: riskScore,
+    risk_score: ip.riskScore,
   };
   saveIpToDatabase(currentScannedIp, reportUID);
 }
@@ -52,14 +52,16 @@ export default async function saveReport(scannedIpList) {
     highestRisk = Math.max(highestRisk, riskScore);
 
     if (isIpInDatabase(scannedIp) && isIpExpired(scannedIp)) {
-      replaceIpInDatabase(scannedIp, reportUID);
+      replaceIpInDatabase(scannedIp, reportUID, expirationDate);
     }
 
     if (!isIpInDatabase(scannedIp)) {
       const currentScannedIp = {
         reportuid: reportUID,
         dateofscan: new Date(),
-        expirationdate: expirationDate,
+        expirationdate: new Date(
+          new Date().setMonth(new Date().getMonth() + 3)
+        ).toDateString(),
         ...scannedIp,
         risk_score: riskScore,
       };
